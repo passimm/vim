@@ -378,6 +378,7 @@ let g:airline_section_c = '%f:%l'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='jellybeans'
+set encoding=utf-8
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
