@@ -61,7 +61,7 @@ iab cpp_main #include <iostream>
 \<CR>return 0;
 \<CR>}
 iab py_main #!/home/opt/python2.7.8/bin/python
-iab divs <div styleName=''><CR></div>
+iab divs <div styleName=""><CR></div>
 iab debug_print printf("mx: at %s(%d)\n", __FILE__, __LINE__);
 iab ri< reinterpret_cast<
 iab si< static_cast<
@@ -70,6 +70,7 @@ iab react0 import React from 'react';
 \<CR>
 \<CR>class Map extends React.Component {
 \<CR>render() {
+\<CR>}
 \<CR>}
 \<CR>
 \<CR>Map.defaultProps = {
@@ -100,9 +101,9 @@ cab git_revert :!git checkout -- %:p
 syntax on
 set termguicolors
 "###########
-colo gruvbox
-let g:gruvbox_contrast_dark="hard"
-let g:gruvbox_contrast_light="soft"
+"colo gruvbox
+"let g:gruvbox_contrast_dark="hard"
+"let g:gruvbox_contrast_light="soft"
 "colo gruvbox
 "###########
 "let ayucolor="light"  " for light version of theme
@@ -110,14 +111,20 @@ let g:gruvbox_contrast_light="soft"
 "let ayucolor="dark"   " for dark version of theme
 "colorscheme ayu
 "##########
-"set background=light
+"set background=dark
 "colorscheme PaperColor
 "#########################
 "colorscheme soft-era
 "let g:airline_theme = 'softera'
 "###############################
-set background=light
-colorscheme monokai
+" set background=light
+"colorscheme monokai
+"
+if &diff
+    colorscheme monokai
+else
+    colorscheme monokai
+endif
 
 
 set diffopt=filler,context:1000000
@@ -158,7 +165,7 @@ nmap ,t :tabe\|tag <C-R>=expand("<cword>")<CR><CR>
 nmap ,tt :tabe\|tag
 nmap ,s :call SPLIT()\|vertical res 75\|tag <C-R>=expand("<cword>")<CR><CR>
 nmap ,ss :call SPLIT()\|vertical res 75\|tag 
-nmap cw "zyw
+nmap zw "zyw
 nmap tc :tabc<cr>
 nmap to :tabo<cr>
 nmap - [c
@@ -193,6 +200,9 @@ nmap tp} :tabe\|Gtags -P <C-R>=expand("<cword>")<CR><CR>
 nmap stf :call OPEN_IN_TAB(expand("<cfile>"))<cr>
 "switch jsx/scss
 nmap as :call SWITCH_JSX_SCSS()<cr>
+"paste and replace
+nmap <silent> cp "_cw<C-R>"<Esc>
+vmap <silent> cp "_c<C-R>"<Esc>
 
 "fold
 "set foldmethod=syntax
@@ -351,7 +361,10 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:100'
 
 "ack
-cnoreabbrev ack LAck! --ignore-dir=build
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
+endif
+cnoreabbrev ack LAck! -g !build
 
 "typescript-vim
 let g:typescript_indent_disable = 0
@@ -377,12 +390,10 @@ let g:airline_powerline_fonts = 1 " install this first: https://github.com/power
 let g:airline_section_c = '%f:%l'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='jellybeans'
+let g:airline_theme='murmur'
 set encoding=utf-8
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
+let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#branch#enabled=1
 
 "ale
 " install eslint before: npm install -g eslint-config-airbnb eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y eslint
@@ -397,4 +408,4 @@ let g:ale_sign_warning = '»'
 let g:ale_enabled = 0
 let g:ale_set_quickfix = 1 "use quickfix window for lint
 let g:ale_open_list = 1
-autocmd BufWritePre *.{js,jsx} ALEFix
+"autocmd BufWritePre *.{js,jsx} ALEFix
