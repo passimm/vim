@@ -1,5 +1,4 @@
 https://github.com/chrisbra/NrrwRgn.git
-https://github.com/passimm/vim.git
 https://github.com/mileszs/ack.vim.git
 https://github.com/w0rp/ale.git
 https://github.com/sjl/badwolf.git
