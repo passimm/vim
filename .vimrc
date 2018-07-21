@@ -34,7 +34,7 @@ set splitright
 set splitbelow
 set mouse-=a
 "set mouse=i
-set nu
+set nonumber
 
 set statusline=
 set statusline+=\[%f:%l
@@ -190,9 +190,9 @@ nmap tr} :tabe\|Gtags -r \b<C-R>=expand("<cword>")<CR>\b<CR>
 "nmap g} :Gtags -g \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
 "nmap sg} :call SPLIT()\|Gtags -g \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
 "nmap tg} :tabe\|Gtags -g \b<C-R>=expand("<cword>")<CR>\b<CR>
-nmap g} :LAck! --ignore-dir=build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr>
-nmap sg} :call SPLIT()\|:LAck --ignore-dir=build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr>
-nmap tg} :tabe\|:LAck --ignore-dir=build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr>
+nmap g} :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr>
+nmap sg} :call SPLIT()\|:LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr>
+nmap tg} :tabe\|:LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr>
 
 "gtag -p
 nmap tp} :tabe\|Gtags -P <C-R>=expand("<cword>")<CR><CR>
