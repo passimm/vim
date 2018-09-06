@@ -4,6 +4,7 @@ https://github.com/w0rp/ale.git
 https://github.com/sjl/badwolf.git
 https://github.com/kien/ctrlp.vim.git
 https://github.com/mattn/emmet-vim.git
+https://github.com/Yggdroot/indentLine.git
 https://github.com/nanotech/jellybeans.vim.git
 https://github.com/scrooloose/nerdtree.git
 git://github.com/arcticicestudio/nord-vim.git
