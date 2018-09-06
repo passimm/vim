@@ -1,3 +1,4 @@
+https://github.com/chrisbra/NrrwRgn.git
 https://github.com/mileszs/ack.vim.git
 https://github.com/w0rp/ale.git
 https://github.com/sjl/badwolf.git
@@ -6,13 +7,13 @@ https://github.com/mattn/emmet-vim.git
 https://github.com/nanotech/jellybeans.vim.git
 https://github.com/scrooloose/nerdtree.git
 git://github.com/arcticicestudio/nord-vim.git
-https://github.com/chrisbra/NrrwRgn.git
 https://github.com/NLKNguyen/papercolor-theme.git
 https://github.com/soft-aesthetic/soft-era-vim.git
 https://github.com/tomtom/tcomment_vim.git
 https://github.com/leafgarland/typescript-vim.git
 https://github.com/vim-airline/vim-airline.git
 https://github.com/vim-airline/vim-airline-themes
+https://github.com/tomasiser/vim-code-dark.git
 git://github.com/altercation/vim-colors-solarized.git
 https://github.com/tpope/vim-fugitive.git
 https://github.com/w0ng/vim-hybrid.git
