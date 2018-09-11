@@ -123,9 +123,20 @@ set termguicolors
 if &diff
     colorscheme monokai
 else
-    colorscheme monokai
+    set background=dark
+    "let g:codedark_conservative = 1
+    colorscheme codedark 
 endif
 
+"vim-airline
+let g:airline_powerline_fonts = 1 " install this first: https://github.com/powerline/fonts
+let g:airline_section_c = '%f:%l'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='codedark'
+set encoding=utf-8
+let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#branch#enabled=1
 
 set diffopt=filler,context:1000000
 if &diff
@@ -179,20 +190,20 @@ nmap gs :call SPLIT()\|Gtags
 nmap gp :Gtags -P 
 nmap gdb :call FILE_AND_LINE()<cr>
 "gtag
-nmap } :Gtags \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
-nmap s} :call SPLIT()\|Gtags \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
-nmap t} :tabe\|Gtags \b<C-R>=expand("<cword>")<CR>\b<CR>
+"nmap } :Gtags \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
+"nmap s} :call SPLIT()\|Gtags \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
+"nmap t} :tabe\|Gtags \b<C-R>=expand("<cword>")<CR>\b<CR>
 "gtag -r
-nmap r} :Gtags -r \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
-nmap sr} :call SPLIT()\|Gtags -r \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
-nmap tr} :tabe\|Gtags -r \b<C-R>=expand("<cword>")<CR>\b<CR>
+"nmap r} :Gtags -r \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
+"nmap sr} :call SPLIT()\|Gtags -r \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
+"nmap tr} :tabe\|Gtags -r \b<C-R>=expand("<cword>")<CR>\b<CR>
 "gtag -g
 "nmap g} :Gtags -g \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
 "nmap sg} :call SPLIT()\|Gtags -g \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
 "nmap tg} :tabe\|Gtags -g \b<C-R>=expand("<cword>")<CR>\b<CR>
-nmap g} :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr>
-nmap sg} :call SPLIT()\|:LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr>
-nmap tg} :tabe\|:LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr>
+nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr>
+nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr><C-W><C-B>
+nmap t} :tabe\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr><C-W><C-B>
 
 "gtag -p
 nmap tp} :tabe\|Gtags -P <C-R>=expand("<cword>")<CR><CR>
@@ -384,16 +395,6 @@ let g:vim_jsx_pretty_colorful_config = 1
 let g:alternateExtensions_jsx = "scss,css"
 let g:alternateExtensions_scss = "jsx"
 let g:alternateExtensions_css = "jsx"
-
-"vim-airline
-let g:airline_powerline_fonts = 1 " install this first: https://github.com/powerline/fonts
-let g:airline_section_c = '%f:%l'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme='murmur'
-set encoding=utf-8
-let g:airline#extensions#hunks#enabled=0
-let g:airline#extensions#branch#enabled=1
 
 "ale
 " install eslint before: npm install -g eslint-config-airbnb eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y eslint
