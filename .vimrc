@@ -34,7 +34,7 @@ set splitright
 set splitbelow
 set mouse-=a
 "set mouse=i
-set nu
+set nonu
 
 if has("gui_running") 
 au GUIEnter * simalt ~x " 窗口启动时自动最大化 
