@@ -34,7 +34,18 @@ set splitright
 set splitbelow
 set mouse-=a
 "set mouse=i
-set nonumber
+set nu
+
+if has("gui_running") 
+au GUIEnter * simalt ~x " 窗口启动时自动最大化 
+set guioptions-=m " 隐藏菜单栏 
+set guioptions-=T " 隐藏工具栏 
+set guioptions-=L " 隐藏左侧滚动条 
+set guioptions-=r " 隐藏右侧滚动条 
+set guioptions-=b " 隐藏底部滚动条 
+set showtabline=0 " 隐藏Tab栏
+set guifont=Consolas_NF:h11:cANSI:qDRAFT
+endif 
 
 set statusline=
 set statusline+=\[%f:%l
@@ -367,7 +378,12 @@ inoremap <buffer> <C-S-Space> <C-X><C-U><C-P>
 let g:ctrlp_regexp = 1
 let g:ctrlp_working_path_mode = 'ra'
 "let g:ctrlp_custom_ignore = '\v[\/](\.(git|hg|svn)|node_modules\/.*)$'
-let g:ctrlp_user_command = 'find %s -type f|grep -v -e \/node_modules\/ | grep -v -e \/build\/'
+if has('win32')
+    let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d | findstr /v /i /r "out[\\] \.git[\\] exe$ so$ dll$ pdb$ lib$ sln$ projhash$ slnhash$ userData$ assemblies$"'
+else
+    let g:ctrlp_user_command = 'find %s -type f|grep -v -e \/node_modules\/ | grep -v -e \/build\/'
+endif
+
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:100'
 
