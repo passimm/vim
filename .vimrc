@@ -226,6 +226,9 @@ nmap as :call SWITCH_JSX_SCSS()<cr>
 nmap <silent> cp "_cw<C-R>"<Esc>
 vmap <silent> cp "_c<C-R>"<Esc>
 
+"search visual selection
+vnoremap // y/<C-R>"<CR>
+
 "fold
 "set foldmethod=syntax
 "let cpp_fold = 1
