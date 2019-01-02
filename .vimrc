@@ -45,6 +45,7 @@ set guioptions-=r " 隐藏右侧滚动条
 set guioptions-=b " 隐藏底部滚动条 
 set showtabline=0 " 隐藏Tab栏
 set guifont=Consolas_NF:h11:cANSI:qDRAFT
+set linespace=-1
 endif 
 
 set statusline=
