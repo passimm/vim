@@ -120,15 +120,22 @@ let g:airline_theme='codedark'
 "let g:gruvbox_contrast_light="soft"
 "colo gruvbox
 "###########
-let ayucolor="light"  " for light version of theme
+"let ayucolor="light"  " for light version of theme
 "let ayucolor="mirage" " for mirage version of theme
 "let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
-let g:airline_theme='ayu'
+"colorscheme ayu
+"let g:airline_theme='ayu'
 "##########
-"set background=light
-"colorscheme PaperColor
-"let g:airline_theme='papercolor'
+set background=light
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.light': {
+  \       'allow_bold': 0,
+  \     }
+  \   }
+  \ }
+colorscheme PaperColor
+let g:airline_theme='papercolor'
 "#########################
 "colorscheme soft-era
 "let g:airline_theme = 'softera'
