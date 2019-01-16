@@ -113,32 +113,34 @@ cab git_revert :!git checkout -- %:p
 "imm color
 syntax on
 set termguicolors
+let g:airline_theme='codedark'
 "###########
 "colo gruvbox
 "let g:gruvbox_contrast_dark="hard"
 "let g:gruvbox_contrast_light="soft"
 "colo gruvbox
 "###########
-"let ayucolor="light"  " for light version of theme
+let ayucolor="light"  " for light version of theme
 "let ayucolor="mirage" " for mirage version of theme
 "let ayucolor="dark"   " for dark version of theme
-"colorscheme ayu
+colorscheme ayu
+let g:airline_theme='ayu'
 "##########
-"set background=dark
+"set background=light
 "colorscheme PaperColor
+"let g:airline_theme='papercolor'
 "#########################
 "colorscheme soft-era
 "let g:airline_theme = 'softera'
 "###############################
 " set background=light
 "colorscheme monokai
-"
+"###############################
+"colorscheme codedark
+"let g:airline_theme='codedark'
 if &diff
-    colorscheme monokai
-else
     set background=dark
-    "let g:codedark_conservative = 1
-    colorscheme tender 
+    colorscheme monokai
 endif
 
 "vim-airline
@@ -147,7 +149,6 @@ let g:airline_section_c = '%f:%l'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 "let g:airline_theme='codedark'
-let g:airline_theme='tender'
 set encoding=utf-8
 let g:airline#extensions#hunks#enabled=0
 let g:airline#extensions#branch#enabled=1
