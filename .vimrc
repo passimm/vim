@@ -44,7 +44,7 @@ set guioptions-=L " 隐藏左侧滚动条
 set guioptions-=r " 隐藏右侧滚动条 
 set guioptions-=b " 隐藏底部滚动条 
 set showtabline=0 " 隐藏Tab栏
-set guifont=Consolas_NF:h11:cANSI:qDRAFT
+set guifont=Ubuntu_Mono_derivative_Powerlin:h12:cANSI:qDRAFT
 set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
 set linespace=0
 endif 
