@@ -194,23 +194,19 @@ nmap <C-W><Down> :resize -5<cr>
 nmap ,p "zp
 nmap ,P "zP
 nmap ,nt :NERDTree<cr>
-nmap ,t :tabe\|tag <C-R>=expand("<cword>")<CR><CR>
-nmap ,tt :tabe\|tag
-nmap ,s :call SPLIT()\|vertical res 75\|tag <C-R>=expand("<cword>")<CR><CR>
-nmap ,ss :call SPLIT()\|vertical res 75\|tag 
 nmap zw "zyw
-nmap tc :tabc<cr>
-nmap to :tabo<cr>
+nmap ,to :tabo<cr>
+nmap <C-T> :tabc<cr>
 nmap - [c
 nmap = ]c
 nmap + mn
 nmap _ mp
 nmap ss ::call SPLIT()<cr>
 nmap C :tabo\|only\|q<cr>
-nmap gt :tabe\|Gtags
-nmap gs :call SPLIT()\|Gtags
-nmap gp :Gtags -P 
-nmap gdb :call FILE_AND_LINE()<cr>
+"nmap gt :tabe\|Gtags
+"nmap gs :call SPLIT()\|Gtags
+"nmap gp :Gtags -P 
+"nmap gdb :call FILE_AND_LINE()<cr>
 "gtag
 "nmap } :Gtags \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
 "nmap s} :call SPLIT()\|Gtags \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
@@ -232,7 +228,7 @@ nmap tp} :tabe\|Gtags -P <C-R>=expand("<cword>")<CR><CR>
 
 nmap stf :call OPEN_IN_TAB(expand("<cfile>"))<cr>
 "switch jsx/scss
-nmap as :call SWITCH_JSX_SCSS()<cr>
+nmap ,as :call SWITCH_JSX_SCSS()<cr>
 "paste and replace
 nmap <silent> cp "_cw<C-R>"<Esc>
 vmap <silent> cp "_c<C-R>"<Esc>
@@ -297,6 +293,16 @@ let g:SuperTabRetainCompletionType=2
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
 "gtags
+function! DARK()
+    execute 'set background=dark'
+    execute 'colorscheme codedark'
+    call airline#switch_theme('codedark')
+endfunction
+function! Light()
+    execute 'set background=light'
+    execute 'colorscheme PaperColor'
+    call airline#switch_theme('papercolor')
+endfunction
 function! SPLIT_GTAG_G(file)
     execute 'winc o'
     execute 'vsplit'
