@@ -175,8 +175,6 @@ nmap <F3> :set paste<CR>
 nmap <F4> :set nopaste<CR>
 nmap <F7> @a
 nmap <F8> @: 
-vmap <F5> :s/^/\/\//g<cr>/wweqweowowo<cr>
-vmap <F6> :s/^\/\///g<cr>/wowowweqweqwo<cr>
 nmap <F9> :tabmove -1<cr>
 nmap <F10> :tabmove +1<cr>
 nmap <C-G> :!echo %:p<cr>
@@ -431,6 +429,10 @@ let g:vim_jsx_pretty_colorful_config = 1
 let g:alternateExtensions_jsx = "scss,css"
 let g:alternateExtensions_scss = "jsx"
 let g:alternateExtensions_css = "jsx"
+
+"guifont++.vim
+let guifontpp_smaller_font_map="<F5>" 
+let guifontpp_larger_font_map="<F6>"
 
 "ale
 " install eslint before: npm install -g eslint-config-airbnb eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y eslint
