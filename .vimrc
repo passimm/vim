@@ -223,9 +223,9 @@ nmap C :tabo\|only\|q<cr>
 "nmap g} :Gtags -g \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
 "nmap sg} :call SPLIT()\|Gtags -g \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
 "nmap tg} :tabe\|Gtags -g \b<C-R>=expand("<cword>")<CR>\b<CR>
-nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr>
-nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr><C-W><C-B>
-nmap t} :tabe\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:lcl<cr><C-W><C-B>
+nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>
+nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>
+nmap t} :tabe\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>
 
 "gtag -p
 nmap tp} :tabe\|Gtags -P <C-R>=expand("<cword>")<CR><CR>
