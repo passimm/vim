@@ -134,8 +134,8 @@ let g:PaperColor_Theme_Options = {
   \     }
   \   }
   \ }
-colorscheme PaperColor
-let g:airline_theme='papercolor'
+colorscheme vim-monokai-tasty
+let g:airline_theme='monokai_tasty'
 "#########################
 "colorscheme soft-era
 "let g:airline_theme = 'softera'
@@ -147,7 +147,7 @@ let g:airline_theme='papercolor'
 "let g:airline_theme='codedark'
 if &diff
     set background=dark
-    colorscheme monokai
+    colorscheme vim-monokai-tasty
 endif
 
 "vim-airline
@@ -299,8 +299,8 @@ let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 "gtags
 function! DARK()
     execute 'set background=dark'
-    execute 'colorscheme codedark'
-    call airline#switch_theme('codedark')
+    execute 'colorscheme vim-monokai-tasty'
+    call airline#switch_theme('monokai_tasty')
 endfunction
 function! Light()
     execute 'set background=light'
