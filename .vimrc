@@ -134,8 +134,8 @@ let g:PaperColor_Theme_Options = {
   \     }
   \   }
   \ }
-colorscheme vim-monokai-tasty
-let g:airline_theme='monokai_tasty'
+"colorscheme vim-monokai-tasty
+"let g:airline_theme='monokai_tasty'
 "#########################
 "colorscheme soft-era
 "let g:airline_theme = 'softera'
@@ -143,8 +143,8 @@ let g:airline_theme='monokai_tasty'
 " set background=light
 "colorscheme monokai
 "###############################
-"colorscheme codedark
-"let g:airline_theme='codedark'
+colorscheme codedark
+let g:airline_theme='codedark'
 if &diff
     set background=dark
     colorscheme vim-monokai-tasty
