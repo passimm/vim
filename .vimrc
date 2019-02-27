@@ -34,7 +34,7 @@ set splitright
 set splitbelow
 set mouse-=a
 "set mouse=i
-set nonu
+set nu
 
 if has("gui_running") 
 au GUIEnter * simalt ~x " 窗口启动时自动最大化 
@@ -44,7 +44,7 @@ set guioptions-=L " 隐藏左侧滚动条
 set guioptions-=r " 隐藏右侧滚动条 
 set guioptions-=b " 隐藏底部滚动条 
 set showtabline=0 " 隐藏Tab栏
-set guifont=Consolas_NF:h12:cANSI:qDRAFT
+set guifont=Consolas_NF:h11:cANSI:qDRAFT
 set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
 set linespace=0
 endif 
@@ -113,46 +113,33 @@ cab git_revert :!git checkout -- %:p
 "imm color
 syntax on
 set termguicolors
-let g:airline_theme='codedark'
 "###########
 "colo gruvbox
-"let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_contrast_dark="hard"
 "let g:gruvbox_contrast_light="soft"
 "colo gruvbox
-"###########
-"let ayucolor="light"  " for light version of theme
-"let ayucolor="mirage" " for mirage version of theme
-"let ayucolor="dark"   " for dark version of theme
-"colorscheme ayu
-"let g:airline_theme='ayu'
-"##########
-set background=light
-let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default.light': {
-  \       'allow_bold': 0,
-  \     }
-  \   }
-  \ }
-"colorscheme vim-monokai-tasty
-"let g:airline_theme='monokai_tasty'
-"#########################
-"colorscheme soft-era
-"let g:airline_theme = 'softera'
 "###############################
-" set background=light
-"colorscheme monokai
+"let g:molokai_original = 1
+"let g:rehash256 = 1
+"color molokai
 "###############################
-colorscheme codedark
-let g:airline_theme='codedark'
-if &diff
-    set background=dark
-    colorscheme vim-monokai-tasty
-endif
+"colorscheme codedark
+"let g:airline_theme='codedark'
+"################################
+colorscheme tender
+let g:airline_theme='tender'
+"if &diff
+"    set background=dark
+"    colorscheme vim-monokai-tasty
+"endif
 
 "vim-airline
 let g:airline_powerline_fonts = 1 " install this first: https://github.com/powerline/fonts
-let g:airline_section_c = '%f:%l'
+let g:airline_section_c = '%f'
+let g:airline_section_y = '%l,%c'
+let g:airline_section_z = '%p%%'
+let g:airline_section_error = ''
+let g:airline_section_warning = ''
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#show_splits = 0
