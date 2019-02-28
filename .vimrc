@@ -34,7 +34,7 @@ set splitright
 set splitbelow
 set mouse-=a
 "set mouse=i
-set nu
+set nonu
 
 if has("gui_running") 
 au GUIEnter * simalt ~x " 窗口启动时自动最大化 
@@ -113,11 +113,14 @@ cab git_revert :!git checkout -- %:p
 "imm color
 syntax on
 set termguicolors
+set background=dark
 "###########
 "colo gruvbox
-let g:gruvbox_contrast_dark="hard"
+"let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_contrast_dark="medium"
+"let g:gruvbox_contrast_dark="soft"
 "let g:gruvbox_contrast_light="soft"
-"colo gruvbox
+colo gruvbox
 "###############################
 "let g:molokai_original = 1
 "let g:rehash256 = 1
@@ -126,8 +129,8 @@ let g:gruvbox_contrast_dark="hard"
 "colorscheme codedark
 "let g:airline_theme='codedark'
 "################################
-colorscheme tender
-let g:airline_theme='tender'
+"colorscheme tender
+"let g:airline_theme='tender'
 "if &diff
 "    set background=dark
 "    colorscheme vim-monokai-tasty
