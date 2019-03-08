@@ -217,7 +217,7 @@ nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>
 nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>
 nmap t} :tabe\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>
 nmap c} :tabe\|:LAck -g !build "(class\|struct\|enum).*<C-R>=expand("<cword>")<CR>"<CR>
-nmap f} :tabe\|:LAck -g !build "\S+ +(\S+::)*<C-R>=expand("<cword>")<CR>\([^()]*\)\s*(\r\|\{\|const)"<CR>
+nmap f} :tabe\|:LAck -g !build -e "\S+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*(\r\|\{\|const)" -e "\S+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*\r"<CR>
 
 "gtag -p
 nmap tp} :tabe\|Gtags -P <C-R>=expand("<cword>")<CR><CR>
