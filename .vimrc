@@ -120,7 +120,7 @@ set background=dark
 let g:gruvbox_contrast_dark="medium"
 "let g:gruvbox_contrast_dark="soft"
 "let g:gruvbox_contrast_light="soft"
-colo gruvbox
+"colo gruvbox
 "###############################
 "let g:molokai_original = 1
 "let g:rehash256 = 1
@@ -129,8 +129,8 @@ colo gruvbox
 "colorscheme codedark
 "let g:airline_theme='codedark'
 "################################
-"colorscheme tender
-"let g:airline_theme='tender'
+colorscheme onedark
+let g:airline_theme='onedark'
 "if &diff
 "    set background=dark
 "    colorscheme vim-monokai-tasty
@@ -197,30 +197,15 @@ nmap + mn
 nmap _ mp
 nmap ss ::call SPLIT()<cr>
 nmap C :tabo\|only\|q<cr>
-"nmap gt :tabe\|Gtags
-"nmap gs :call SPLIT()\|Gtags
-"nmap gp :Gtags -P 
-"nmap gdb :call FILE_AND_LINE()<cr>
-"gtag
-"nmap } :Gtags \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
-"nmap s} :call SPLIT()\|Gtags \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
-"nmap t} :tabe\|Gtags \b<C-R>=expand("<cword>")<CR>\b<CR>
-"gtag -r
-"nmap r} :Gtags -r \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
-"nmap sr} :call SPLIT()\|Gtags -r \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
-"nmap tr} :tabe\|Gtags -r \b<C-R>=expand("<cword>")<CR>\b<CR>
-"gtag -g
-"nmap g} :Gtags -g \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
-"nmap sg} :call SPLIT()\|Gtags -g \b<C-R>=expand("<cword>")<CR>\b<CR>:lcl<cr>
-"nmap tg} :tabe\|Gtags -g \b<C-R>=expand("<cword>")<CR>\b<CR>
+
 nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>
 nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>
 nmap t} :tabe\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>
 nmap c} :tabe\|:LAck -g !build "(class\|struct\|enum).*<C-R>=expand("<cword>")<CR>"<CR>
 if has('win32')
-    nmap f} :tabe\|:LAck -g !build -e "\S+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*(\r\|\{\|const)" -e "\S+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*\r"<CR>
+    nmap f} :tabe\|:LAck -g !build -e "[^=]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^=]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*\r"<CR>
 else
-    nmap f} :tabe\|:LAck -g !build -e "\S+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*($\|\{\|const)" -e "\S+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*$"<CR>
+    nmap f} :tabe\|:LAck -g !build -e "[^=]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*($\|\{\|const)" -e "[^=]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*$"<CR>
 endif
 
 "gtag -p

@@ -18,3 +18,5 @@ https://github.com/pangloss/vim-javascript.git
 https://github.com/MaxMEllon/vim-jsx-pretty.git
 https://github.com/patstockwell/vim-monokai-tasty.git
 https://github.com/rakr/vim-one.git
+https://github.com/joshdick/onedark.vim.git
+https://github.com/octol/vim-cpp-enhanced-highlight.git
