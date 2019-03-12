@@ -44,7 +44,7 @@ set guioptions-=L " 隐藏左侧滚动条
 set guioptions-=r " 隐藏右侧滚动条 
 set guioptions-=b " 隐藏底部滚动条 
 set showtabline=0 " 隐藏Tab栏
-set guifont=Consolas_NF:h11:cANSI:qDRAFT
+set guifont=Ubuntu_Mono:h12:cANSI:qDRAFT
 set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
 set linespace=0
 endif 
@@ -137,7 +137,7 @@ let g:airline_theme='onedark'
 "endif
 
 "vim-airline
-let g:airline_powerline_fonts = 1 " install this first: https://github.com/powerline/fonts
+let g:airline_powerline_fonts = 0 " install this first: https://github.com/powerline/fonts
 let g:airline_section_c = '%f'
 let g:airline_section_y = '%l,%c'
 let g:airline_section_z = '%p%%'
@@ -150,7 +150,6 @@ let g:airline#extensions#tabline#exclude_preview = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#show_close_button = 0
-let g:airline_powerline_fonts = 1
 "let g:airline_theme='codedark'
 set encoding=utf-8
 let g:airline#extensions#hunks#enabled=0
