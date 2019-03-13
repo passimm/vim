@@ -129,6 +129,7 @@ let g:gruvbox_contrast_dark="medium"
 "colorscheme codedark
 "let g:airline_theme='codedark'
 "################################
+let g:onedark_hide_endofbuffer=1
 colorscheme onedark
 let g:airline_theme='onedark'
 "if &diff
