@@ -200,12 +200,12 @@ nmap C :tabo\|only\|q<cr>
 
 nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>
 nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>
-nmap t} :tabe\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>
-nmap c} :tabe\|:LAck -g !build "(class\|struct\|enum).*<C-R>=expand("<cword>")<CR>"<CR>
+nmap t} :tabedit\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR><C-W><C-W>
+nmap c} :tabedit\|:LAck -g !build "(class\|struct\|enum).*<C-R>=expand("<cword>")<CR>"<CR><C-W><C-W>
 if has('win32')
-    nmap f} :tabe\|:LAck -g !build -e "[^=]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^=]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*\r"<CR>
+    nmap f} :tabedit\|:LAck -g !build -e "[^=]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^=]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*\r"<CR><C-W><C-W>
 else
-    nmap f} :tabe\|:LAck -g !build -e "[^=]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*($\|\{\|const)" -e "[^=]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*$"<CR>
+    nmap f} :tabedit\|:LAck -g !build -e "[^=]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*($\|\{\|const)" -e "[^=]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*$"<CR><C-W><C-W>
 endif
 
 "gtag -p
