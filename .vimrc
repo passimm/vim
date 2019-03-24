@@ -132,10 +132,10 @@ let g:gruvbox_contrast_dark="medium"
 let g:onedark_hide_endofbuffer=1
 colorscheme onedark
 let g:airline_theme='onedark'
-"if &diff
-"    set background=dark
-"    colorscheme vim-monokai-tasty
-"endif
+if &diff
+    set background=dark
+    colorscheme vim-monokai-tasty
+endif
 
 "vim-airline
 let g:airline_powerline_fonts = 0 " install this first: https://github.com/powerline/fonts
@@ -151,6 +151,7 @@ let g:airline#extensions#tabline#exclude_preview = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#quickfix#location_text = 'Search'
 "let g:airline_theme='codedark'
 set encoding=utf-8
 let g:airline#extensions#hunks#enabled=0
@@ -198,14 +199,14 @@ nmap _ mp
 nmap ss ::call SPLIT()<cr>
 nmap C :tabo\|only\|q<cr>
 
-nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>
-nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>
-nmap t} :tabedit\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR><C-W><C-W>
-nmap c} :tabedit\|:LAck -g !build "(class\|struct\|enum)\s+<C-R>=expand("<cword>")<CR>\b"<CR><C-W><C-W>
+nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>
+nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>
+nmap t} :tabedit\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR><C-W><C-W>
+nmap c} :tabedit\|:LAck -g !build "(class\|struct\|enum)\s+<C-R>=expand("<cword>")<CR>\b"<CR>:call SETLOCLIST()<CR><C-W><C-W>
 if has('win32')
-    nmap f} :tabedit\|:LAck -g !build -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*\r"<CR><C-W><C-W>
+    nmap f} :tabedit\|:LAck -g !build -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*\r"<CR>:call SETLOCLIST()<CR><C-W><C-W>
 else
-    nmap f} :tabedit\|:LAck -g !build -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*($\|\{\|const)" -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*$"<CR><C-W><C-W>
+    nmap f} :tabedit\|:LAck -g !build -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*($\|\{\|const)" -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*$"<CR>:call SETLOCLIST()<CR><C-W><C-W>
 endif
 
 "gtag -p
@@ -278,6 +279,9 @@ let g:SuperTabRetainCompletionType=2
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
 "gtags
+function! SETLOCLIST()
+    execute "call setloclist(0, [], 'a', {'title': ''})"
+endfunction
 function! DARK()
     execute 'set background=dark'
     execute 'colorscheme vim-monokai-tasty'
@@ -422,6 +426,7 @@ let g:alternateExtensions_css = "jsx"
 "
 let guifontpp_smaller_font_map="<F5>" 
 let guifontpp_larger_font_map="<F6>"
+let guifontpp_original_font_map="<C-F5>"
 
 "ale
 " install eslint before: npm install -g eslint-config-airbnb eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y eslint
