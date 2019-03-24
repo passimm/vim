@@ -397,7 +397,7 @@ if executable('rg')
   let g:ackprg = 'rg --vimgrep'
 endif
 cnoreabbrev ack LAck! -g !build
-let g:ack_lhandler = "lopen 5"
+let g:ack_lhandler = "top lopen 5"
 let g:ackhighlight = 1
 
 "typescript-vim
