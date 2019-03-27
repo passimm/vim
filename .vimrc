@@ -111,6 +111,9 @@ cab svn_revert :!svn revert %:p
 cab git_revert :!git checkout -- %:p
 cab tabcloseright .+1,$tabdo :tabc
 cab tabcloseleft 0,.-1tabdo :tabc
+cab pwd_xtable chdir \*\storage\xstore\src\xtable
+cab pwd_api2 chdir \*\storage\xstore\src\xtable\api\managed2\obj\amd64
+cab pwd_all chdir \*\storage\xstore\src
 
 "imm color
 syntax on
