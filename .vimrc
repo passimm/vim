@@ -109,6 +109,8 @@ cab tabe tabl\|tabe
 cab fork :tabe %:p
 cab svn_revert :!svn revert %:p
 cab git_revert :!git checkout -- %:p
+cab tabcloseright .+1,$tabdo :tabc
+cab tabcloseleft 0,.-1tabdo :tabc
 
 "imm color
 syntax on
@@ -202,7 +204,7 @@ nmap C :tabo\|only\|q<cr>
 nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>
 nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>
 nmap t} :tabedit\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR><C-W><C-W>
-nmap c} :tabedit\|:LAck -g !build "(class\|struct\|enum)\s+<C-R>=expand("<cword>")<CR>\b"<CR>:call SETLOCLIST()<CR><C-W><C-W>
+nmap c} :tabedit\|:LAck -g !build "(class\|struct\|enum)\s+((dll|DLL|Dll)\S+\s+)*<C-R>=expand("<cword>")<CR>\b"<CR>:call SETLOCLIST()<CR><C-W><C-W>
 if has('win32')
     nmap f} :tabedit\|:LAck -g !build -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*\r"<CR>:call SETLOCLIST()<CR><C-W><C-W>
 else
