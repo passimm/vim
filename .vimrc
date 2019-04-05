@@ -106,7 +106,7 @@ iab react1 import React from 'react';
 \<CR>};
 
 cab tabe tabl\|tabe
-cab fork :tabe %:p
+cab fork :tab split
 cab svn_revert :!svn revert %:p
 cab git_revert :!git checkout -- %:p
 cab tabcloseright .+1,$tabdo :tabc
@@ -191,6 +191,8 @@ nmap <C-H> :tabp<CR>
 nmap <C-L> :tabn<CR> 
 vmap <C-Y> "zy 
 nmap <C-n> :NERDTreeToggle<CR>
+nmap <C-k> :lp<cr>
+nmap <C-j> :lne<cr>
 "nmap <A-P> :pu z<cr>
 nmap <PageUp> :lp<cr>
 nmap <PageDown> :lne<cr>
