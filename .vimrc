@@ -237,7 +237,7 @@ vmap <silent> cp "_c<C-R>"<Esc>
 vnoremap // y/<C-R>"<CR>
 
 "fold
-"set foldmethod=syntax
+set foldmethod=syntax
 "let cpp_fold = 1
 "let perl_fold = 1
 let perl_nofold_packages = 1
