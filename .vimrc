@@ -183,13 +183,13 @@ nmap <F2> :TlistToggle<CR>
 nmap <F3> :set paste<CR>
 nmap <F4> :set nopaste<CR>
 nmap <F7> @a
-nmap <F8> @: 
+nmap <F8> @:
 nmap <F9> :tabmove -1<cr>
 nmap <F10> :tabmove +1<cr>
-nmap <C-G> :!echo %:p<cr>
-nmap <C-H> :tabp<CR>
-nmap <C-L> :tabn<CR> 
-vmap <C-Y> "zy 
+nmap <C-g> :!echo %:p<cr>
+nmap <C-h> :tabp<CR>
+nmap <C-l> :tabn<CR>
+vmap <C-Y> "zy
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <C-k> :lp<cr>
 nmap <C-j> :lne<cr>
@@ -390,11 +390,11 @@ let g:ConqueGdb_SrcSplit = 'left'
 let g:tabman_number = 0
 
 "java complete
-if has("autocmd") 
-    autocmd Filetype java setlocal omnifunc=javacomplete#Complete 
+if has("autocmd")
+    autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 endif
 setlocal completefunc=javacomplete#CompleteParamsInfo
-inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P> 
+inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P>
 inoremap <buffer> <C-S-Space> <C-X><C-U><C-P>
 
 "ctrlp
