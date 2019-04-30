@@ -216,12 +216,8 @@ nmap C :tabo\|only\|q<cr>
 nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>
 nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>
 nmap t} :tabedit\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR><C-W><C-W>
-nmap c} :tabedit\|:LAck -g !build "(class\|struct\|enum)\s+((dll\|DLL\|Dll)\S+\s+)*<C-R>=expand("<cword>")<CR>\b"<CR>:call SETLOCLIST()<CR><C-W><C-W>
-if has('win32')
-    nmap f} :tabedit\|:LAck -g !build -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*\r"<CR>:call SETLOCLIST()<CR><C-W><C-W>
-else
-    nmap f} :tabedit\|:LAck -g !build -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\([^()]*\)\s*($\|\{\|const)" -e "[^= \t]+ +(\S+::)*<C-R>=expand("<cword>")<CR>\s*\(\s*$"<CR>:call SETLOCLIST()<CR><C-W><C-W>
-endif
+nmap c} :tabedit\|:call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>
+nmap f} :tabedit\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>
 
 "gtag -p
 nmap tp} :tabe\|Gtags -P <C-R>=expand("<cword>")<CR><CR>
@@ -238,6 +234,7 @@ vnoremap // y/<C-R>"<CR>
 
 "fold
 set foldmethod=syntax
+set nofoldenable
 "let cpp_fold = 1
 "let perl_fold = 1
 let perl_nofold_packages = 1
@@ -293,6 +290,18 @@ let g:SuperTabRetainCompletionType=2
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
 "gtags
+function! SEARCH_FUNC(word)
+    if has('win32')
+        "execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
+        execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
+    else
+        "execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($\|\{\|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
+        "execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
+    endif
+endfunction
+function! SEARCH_CLASS(word)
+    execute printf(':LAck -g !build "(class|struct|enum)\s+((dll|DLL|Dll)\S+\s+)*%s\b"', a:word)
+endfunction
 function! SETLOCLIST()
     execute "call setloclist(0, [], 'a', {'title': ''})"
 endfunction
