@@ -191,8 +191,8 @@ nmap <C-h> :tabp<CR>
 nmap <C-l> :tabn<CR>
 vmap <C-Y> "zy
 nmap <C-n> :NERDTreeToggle<CR>
-nmap <C-k> :lp<cr>
-nmap <C-j> :lne<cr>
+nmap <C-k> :lprevious<cr>
+nmap <C-j> :lnext<cr>
 "nmap <A-P> :pu z<cr>
 nmap <PageUp> :lp<cr>
 nmap <PageDown> :lne<cr>
@@ -233,7 +233,7 @@ vmap <silent> cp "_c<C-R>"<Esc>
 vnoremap // y/<C-R>"<CR>
 
 "fold
-set foldmethod=syntax
+"set foldmethod=syntax
 set nofoldenable
 "let cpp_fold = 1
 "let perl_fold = 1
@@ -296,7 +296,7 @@ function! SEARCH_FUNC(word)
         execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
     else
         "execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($\|\{\|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
-        "execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
+        execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
     endif
 endfunction
 function! SEARCH_CLASS(word)
