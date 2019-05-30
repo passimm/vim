@@ -144,9 +144,9 @@ set background=dark
 "let g:onedark_hide_endofbuffer=1
 "colorscheme onedark
 "################################
-set background=dark
+set background=light
 colorscheme solarized8
-let g:airline_solarized_bg='dark'
+let g:airline_solarized_bg='light'
 let g:airline_theme='solarized'
 if &diff
     set background=dark
@@ -314,12 +314,14 @@ function! DARK()
     execute 'colorscheme solarized8'
     let g:airline_solarized_bg='dark'
     call airline#switch_theme('solarized')
+    hi clear VertSplit
 endfunction
 function! Light()
     execute 'set background=light'
     execute 'colorscheme solarized8'
     let g:airline_solarized_bg='light'
     call airline#switch_theme('solarized')
+    hi clear VertSplit
 endfunction
 function! SPLIT_GTAG_G(file)
     execute 'winc o'
