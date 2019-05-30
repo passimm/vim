@@ -129,7 +129,7 @@ set background=dark
 "###########
 "colo gruvbox
 "let g:gruvbox_contrast_dark="hard"
-let g:gruvbox_contrast_dark="medium"
+"let g:gruvbox_contrast_dark="medium"
 "let g:gruvbox_contrast_dark="soft"
 "let g:gruvbox_contrast_light="soft"
 "colo gruvbox
@@ -141,9 +141,13 @@ let g:gruvbox_contrast_dark="medium"
 "colorscheme codedark
 "let g:airline_theme='codedark'
 "################################
-let g:onedark_hide_endofbuffer=1
-colorscheme onedark
-let g:airline_theme='onedark'
+"let g:onedark_hide_endofbuffer=1
+"colorscheme onedark
+"################################
+set background=dark
+colorscheme solarized8
+let g:airline_solarized_bg='dark'
+let g:airline_theme='solarized'
 if &diff
     set background=dark
     colorscheme vim-monokai-tasty
@@ -307,13 +311,15 @@ function! SETLOCLIST()
 endfunction
 function! DARK()
     execute 'set background=dark'
-    execute 'colorscheme vim-monokai-tasty'
-    call airline#switch_theme('monokai_tasty')
+    execute 'colorscheme solarized8'
+    let g:airline_solarized_bg='dark'
+    call airline#switch_theme('solarized')
 endfunction
 function! Light()
     execute 'set background=light'
-    execute 'colorscheme PaperColor'
-    call airline#switch_theme('papercolor')
+    execute 'colorscheme solarized8'
+    let g:airline_solarized_bg='light'
+    call airline#switch_theme('solarized')
 endfunction
 function! SPLIT_GTAG_G(file)
     execute 'winc o'
