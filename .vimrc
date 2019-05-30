@@ -144,14 +144,15 @@ set background=dark
 "let g:onedark_hide_endofbuffer=1
 "colorscheme onedark
 "################################
-set background=light
-colorscheme solarized8
-let g:airline_solarized_bg='light'
-let g:airline_theme='solarized'
-if &diff
+if strftime("%H") > 18
     set background=dark
-    colorscheme vim-monokai-tasty
+    let g:airline_solarized_bg='dark'
+else
+    set background=light
+    let g:airline_solarized_bg='light'
 endif
+colorscheme solarized8
+let g:airline_theme='solarized'
 
 "vim-airline
 let g:airline_powerline_fonts = 0 " install this first: https://github.com/powerline/fonts
