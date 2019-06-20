@@ -144,13 +144,8 @@ set background=dark
 "let g:onedark_hide_endofbuffer=1
 "colorscheme onedark
 "################################
-if strftime("%H") > 18
-    set background=dark
-    let g:airline_solarized_bg='dark'
-else
-    set background=light
-    let g:airline_solarized_bg='light'
-endif
+set background=dark
+let g:airline_solarized_bg='dark'
 colorscheme solarized8
 let g:airline_theme='solarized'
 
