@@ -216,8 +216,12 @@ nmap C :tabo\|only\|q<cr>
 nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>
 nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>
 nmap t} :tabedit\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR><C-W><C-W>
-nmap c} :tabedit\|:call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>
-nmap f} :tabedit\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>
+nmap c} :call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>
+nmap sc} :call SPLIT()\|:call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-P>:lclose<CR>
+nmap tc} :tabedit\|:call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>
+nmap f} :call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>
+nmap sf} :call SPLIT()\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-P>:lclose<CR>
+nmap tf} :tabedit\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>
 
 "gtag -p
 nmap tp} :tabe\|Gtags -P <C-R>=expand("<cword>")<CR><CR>
@@ -300,7 +304,7 @@ function! SEARCH_FUNC(word)
     endif
 endfunction
 function! SEARCH_CLASS(word)
-    execute printf(':LAck -g !build "(class|struct|enum)\s+((dll|DLL|Dll)\S+\s+)*%s\b"', a:word)
+    execute printf(':LAck -g !build "(class|struct|enum|typedef)\s+((dll|DLL|Dll)\S+\s+)*%s\b"', a:word)
 endfunction
 function! SETLOCLIST()
     execute "call setloclist(0, [], 'a', {'title': ''})"
