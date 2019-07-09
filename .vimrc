@@ -44,9 +44,9 @@ set guioptions-=L " 隐藏左侧滚动条
 set guioptions-=r " 隐藏右侧滚动条 
 set guioptions-=b " 隐藏底部滚动条 
 set showtabline=0 " 隐藏Tab栏
-set guifont=Fira_Code:h11:cANSI:qDRAFT
+set guifont=Monaco:h11:cANSI:qDRAFT
 set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
-set linespace=0
+"set linespace=0
 endif 
 
 set statusline=
@@ -354,6 +354,17 @@ function! SPLIT()
         :split
     endif
 endfunction
+function! LACK_OPEN()
+    let width = winwidth(0)
+    let height = winheight(0)
+    let ratio = width/height
+    if (ratio > 2)
+        :top lopen 5
+    else
+        :top lopen 15
+    endif
+endfunction
+
 function! SWITCH_JSX_SCSS()
     let ff = expand("%")
     let ll = split(ff,'/')
@@ -432,7 +443,7 @@ if executable('rg')
   let g:ackprg = 'rg --vimgrep'
 endif
 cnoreabbrev ack LAck! -g !build
-let g:ack_lhandler = "top lopen 5"
+let g:ack_lhandler = "call LACK_OPEN()"
 let g:ackhighlight = 1
 
 "typescript-vim
