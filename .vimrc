@@ -213,15 +213,15 @@ nmap _ mp
 nmap ss ::call SPLIT()<cr>
 nmap C :tabo\|only\|q<cr>
 
-nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>
-nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>
-nmap t} :tabedit\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR><C-W><C-W>
-nmap c} :call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>
-nmap sc} :call SPLIT()\|:call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-P>:lclose<CR>
-nmap tc} :tabedit\|:call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>
-nmap f} :call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>
-nmap sf} :call SPLIT()\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-P>:lclose<CR>
-nmap tf} :tabedit\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>
+nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>:call RESIZE_QUICKFIX()<CR>
+nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>:call RESIZE_QUICKFIX()<CR>
+nmap t} :tabedit\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR><C-W><C-W>:call RESIZE_QUICKFIX()<CR>
+nmap c} :call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>:call RESIZE_QUICKFIX()<CR>
+nmap sc} :call SPLIT()\|:call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-P>:lclose<CR>:call RESIZE_QUICKFIX()<CR>
+nmap tc} :tabedit\|:call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>:call RESIZE_QUICKFIX()<CR>
+nmap f} :call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>:call RESIZE_QUICKFIX()<CR>
+nmap sf} :call SPLIT()\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-P>:lclose<CR>:call RESIZE_QUICKFIX()<CR>
+nmap tf} :tabedit\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>:call RESIZE_QUICKFIX()<CR>
 
 "gtag -p
 nmap tp} :tabe\|Gtags -P <C-R>=expand("<cword>")<CR><CR>
@@ -294,6 +294,16 @@ let g:SuperTabRetainCompletionType=2
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
 "gtags
+function! RESIZE_QUICKFIX()
+    let width = winwidth(0)
+    let height = winheight(0)
+    let ratio = width/height
+    if (ratio > 2)
+        :windo if &buftype == "quickfix" | lopen 5 | endif
+    else
+        :windo if &buftype == "quickfix" | lopen 15 | endif
+    endif
+endfunction
 function! SEARCH_FUNC(word)
     if has('win32')
         "execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
@@ -304,7 +314,7 @@ function! SEARCH_FUNC(word)
     endif
 endfunction
 function! SEARCH_CLASS(word)
-    execute printf(':LAck -g !build "(class|struct|enum|typedef)\s+((dll|DLL|Dll)\S+\s+)*%s\b"', a:word)
+    execute printf(':LAck -g !build "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b"', a:word)
 endfunction
 function! SETLOCLIST()
     execute "call setloclist(0, [], 'a', {'title': ''})"
