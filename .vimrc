@@ -37,14 +37,15 @@ set mouse-=a
 set nonu
 
 if has("gui_running") 
-au GUIEnter * simalt ~x " 窗口启动时自动最大化 
+au GUIEnter * simalt ~x  " 窗口启动时自动最大化 
+au VimResized * wincmd =  "evenly resize each window
 set guioptions-=m " 隐藏菜单栏 
 set guioptions-=T " 隐藏工具栏 
 set guioptions-=L " 隐藏左侧滚动条 
 set guioptions-=r " 隐藏右侧滚动条 
 set guioptions-=b " 隐藏底部滚动条 
 set showtabline=0 " 隐藏Tab栏
-set guifont=InputMono:h11:cANSI:qDRAFT
+set guifont=Iosevka:h11:cANSI:qDRAFT
 set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
 "set linespace=0
 endif 
