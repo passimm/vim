@@ -128,7 +128,7 @@ syntax on
 set termguicolors
 set background=dark
 "###########
-"colo gruvbox
+colo gruvbox
 "let g:gruvbox_contrast_dark="hard"
 "let g:gruvbox_contrast_dark="medium"
 "let g:gruvbox_contrast_dark="soft"
@@ -145,10 +145,11 @@ set background=dark
 "let g:onedark_hide_endofbuffer=1
 "colorscheme onedark
 "################################
-set background=dark
-let g:airline_solarized_bg='dark'
-colorscheme solarized8
-let g:airline_theme='solarized'
+"set background=dark
+"let g:airline_solarized_bg='dark'
+"colorscheme solarized8
+"let g:airline_theme='solarized'
+let g:airline_theme='gruvbox'
 
 "vim-airline
 let g:airline_powerline_fonts = 0 " install this first: https://github.com/powerline/fonts
