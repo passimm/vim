@@ -128,6 +128,8 @@ syntax on
 set termguicolors
 set background=dark
 "###########
+let g:gruvbox_italic=0
+let g:gruvbox_bold=0
 colo gruvbox
 "let g:gruvbox_contrast_dark="hard"
 "let g:gruvbox_contrast_dark="medium"
