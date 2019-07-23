@@ -216,6 +216,7 @@ nmap + mn
 nmap _ mp
 nmap ss ::call SPLIT()<cr>
 nmap C :tabo\|only\|q<cr>
+nnoremap ,cd :chdir %:p:h\|pwd<cr>
 
 nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>:call RESIZE_QUICKFIX()<CR>
 nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>:call RESIZE_QUICKFIX()<CR>
