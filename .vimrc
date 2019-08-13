@@ -130,6 +130,7 @@ set background=dark
 "###########
 let g:gruvbox_italic=0
 let g:gruvbox_bold=0
+let g:gruvbox_contrast_dark="soft"
 colo gruvbox
 "let g:gruvbox_contrast_dark="hard"
 "let g:gruvbox_contrast_dark="medium"
@@ -175,6 +176,7 @@ let g:airline#extensions#branch#enabled=1
 
 set diffopt=filler,context:1000000
 if &diff
+  colo solarized8
 else
    hi CursorLine gui=underline cterm=underline
 endif
