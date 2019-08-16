@@ -229,11 +229,11 @@ nmap tc} :tabedit\|:call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SE
 nmap f} :call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>:call RESIZE_QUICKFIX()<CR>
 nmap sf} :call SPLIT()\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-P>:lclose<CR>:call RESIZE_QUICKFIX()<CR>
 nmap tf} :tabedit\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>:call RESIZE_QUICKFIX()<CR>
+nmap ,sf :call SEARCH_FILE("
 
 "gtag -p
 nmap tp} :tabe\|Gtags -P <C-R>=expand("<cword>")<CR><CR>
 
-nmap stf :call OPEN_IN_TAB(expand("<cfile>"))<cr>
 "switch jsx/scss
 nmap ,as :call SWITCH_JSX_SCSS()<cr>
 "paste and replace
