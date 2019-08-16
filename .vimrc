@@ -301,6 +301,12 @@ let g:SuperTabRetainCompletionType=2
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
 "gtags
+function! SEARCH_FILE(word)
+    let old = g:ackprg
+    let g:ackprg = 'ag --vimgrep --nogroup --nocolor'
+    execute printf(':AckFile %s', a:word)
+    let g:ackprg = old
+endfunction
 function! RESIZE_QUICKFIX()
     let width = winwidth(0)
     let height = winheight(0)
