@@ -1,5 +1,4 @@
 https://github.com/mileszs/ack.vim.git
-https://github.com/rking/ag.vim.git
 https://github.com/w0rp/ale.git
 https://github.com/kien/ctrlp.vim.git
 https://github.com/mattn/emmet-vim.git
