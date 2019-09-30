@@ -45,7 +45,7 @@ set guioptions-=L " 隐藏左侧滚动条
 set guioptions-=r " 隐藏右侧滚动条 
 set guioptions-=b " 隐藏底部滚动条 
 set showtabline=0 " 隐藏Tab栏
-set guifont=Iosevka:h11:cANSI:qDRAFT
+set guifont=Iosevka:h12:cANSI:qDRAFT
 set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
 "set linespace=0
 endif 
@@ -131,7 +131,7 @@ set background=dark
 let g:gruvbox_italic=0
 let g:gruvbox_bold=0
 let g:gruvbox_contrast_dark="soft"
-colo gruvbox
+"colo gruvbox
 "let g:gruvbox_contrast_dark="hard"
 "let g:gruvbox_contrast_dark="medium"
 "let g:gruvbox_contrast_dark="soft"
@@ -152,7 +152,10 @@ colo gruvbox
 "let g:airline_solarized_bg='dark'
 "colorscheme solarized8
 "let g:airline_theme='solarized'
-let g:airline_theme='gruvbox'
+"colorscheme dracula
+"let g:airline_theme='dracula'
+colorscheme night-owl 
+let g:airline_theme='jellybeans'
 
 "vim-airline
 let g:airline_powerline_fonts = 0 " install this first: https://github.com/powerline/fonts
@@ -230,6 +233,9 @@ nmap f} :call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<C
 nmap sf} :call SPLIT()\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-P>:lclose<CR>:call RESIZE_QUICKFIX()<CR>
 nmap tf} :tabedit\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>:call RESIZE_QUICKFIX()<CR>
 nmap ,sf :call SEARCH_FILE("
+nmap ,sc :call SEARCH_CLASS("
+nmap ,sd :call SEARCH_FUNC("
+nmap AS :call SPLIT_A()<CR>
 
 "gtag -p
 nmap tp} :tabe\|Gtags -P <C-R>=expand("<cword>")<CR><CR>
@@ -301,6 +307,11 @@ let g:SuperTabRetainCompletionType=2
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
 "gtags
+function! SPLIT_A()
+    execute 'call SPLIT()'
+    execute "normal \<c-w>b"
+    execute 'A'
+endfunction
 function! SEARCH_FILE(word)
     let old = g:ackprg
     let g:ackprg = 'ag --vimgrep --nogroup --nocolor'
@@ -414,6 +425,13 @@ function! SWITCH_JSX_SCSS()
         endif
     endif
 endfunction
+function DeleteHiddenBuffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bwipeout' buf
+    endfor
+endfunction
 
 
 "ctags/cscope switcher
@@ -507,3 +525,8 @@ let g:ale_enabled = 0
 let g:ale_set_quickfix = 1 "use quickfix window for lint
 let g:ale_open_list = 1
 "autocmd BufWritePre *.{js,jsx} ALEFix
+"
+"vim-auto-save
+let g:auto_save = 1
+let g:auto_save_no_updatetime = 1
+let g:auto_save_in_insert_mode = 1
