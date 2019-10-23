@@ -154,8 +154,8 @@ let g:gruvbox_contrast_dark="soft"
 "let g:airline_theme='solarized'
 "colorscheme dracula
 "let g:airline_theme='dracula'
-colorscheme night-owl 
-let g:airline_theme='jellybeans'
+colorscheme vim-material 
+let g:airline_theme='material'
 
 "vim-airline
 let g:airline_powerline_fonts = 0 " install this first: https://github.com/powerline/fonts
@@ -179,7 +179,6 @@ let g:airline#extensions#branch#enabled=1
 
 set diffopt=filler,context:1000000
 if &diff
-  colo solarized8
 else
    hi CursorLine gui=underline cterm=underline
 endif
