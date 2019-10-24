@@ -34,7 +34,7 @@ set splitright
 set splitbelow
 set mouse-=a
 "set mouse=i
-set nonu
+set nu
 
 if has("gui_running") 
 au GUIEnter * simalt ~x  " 窗口启动时自动最大化 
@@ -183,7 +183,10 @@ else
    hi CursorLine gui=underline cterm=underline
 endif
 
+"hide vert split line
 hi clear VertSplit
+hi VertSplit guibg=bg guifg=bg
+
 
 "Key Mappings
 nmap <F1> <C-W><C-W>
@@ -211,7 +214,6 @@ nmap <C-W><Down> :resize -5<cr>
 nmap ,p "zp
 nmap ,P "zP
 nmap ,nt :NERDTree<cr>
-nmap zw "zyw
 nmap ,to :tabo<cr>
 nmap <C-T> :tabc<cr>
 nmap - [c
@@ -244,6 +246,7 @@ nmap ,as :call SWITCH_JSX_SCSS()<cr>
 "paste and replace
 nmap <silent> cp "_cw<C-R>"<Esc>
 vmap <silent> cp "_c<C-R>"<Esc>
+nmap <silent> ,cp "_cw<C-R>z<Esc>
 
 "search visual selection
 vnoremap // y/<C-R>"<CR>
@@ -311,6 +314,7 @@ function! SPLIT_A()
     execute "normal \<c-w>b"
     execute 'A'
 endfunction
+command! -nargs=1 SearchFile :call SEARCH_FILE(<q-args>)
 function! SEARCH_FILE(word)
     let old = g:ackprg
     let g:ackprg = 'ag --vimgrep --nogroup --nocolor'
@@ -327,6 +331,7 @@ function! RESIZE_QUICKFIX()
         :windo if &buftype == "quickfix" | lopen 15 | endif
     endif
 endfunction
+command! -nargs=1 SearchFunc :call SEARCH_FUNC(<q-args>)
 function! SEARCH_FUNC(word)
     if has('win32')
         "execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
@@ -336,6 +341,7 @@ function! SEARCH_FUNC(word)
         execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
     endif
 endfunction
+command! -nargs=1 SearchClass :call SEARCH_CLASS(<q-args>)
 function! SEARCH_CLASS(word)
     execute printf(':LAck -g !build "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b"', a:word)
 endfunction
