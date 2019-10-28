@@ -171,7 +171,9 @@ let g:airline#extensions#tabline#exclude_preview = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#quickfix#location_text = '[Location List][-]'
+"let g:airline#extensions#quickfix#location_text = '[Location List][-]'
+let g:airline#extensions#quickfix#location_text = ''
+
 "let g:airline_theme='codedark'
 set encoding=utf-8
 let g:airline#extensions#hunks#enabled=0
@@ -224,18 +226,15 @@ nmap ss ::call SPLIT()<cr>
 nmap C :tabo\|only\|q<cr>
 nnoremap ,cd :chdir %:p:h\|pwd<cr>
 
-nmap } :LAck! -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>:call RESIZE_QUICKFIX()<CR>
-nmap s} :call SPLIT()\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR>:call RESIZE_QUICKFIX()<CR>
-nmap t} :tabedit\|:LAck -g !build -w <C-R>=expand("<cword>")<CR><CR>:call SETLOCLIST()<CR><C-W><C-W>:call RESIZE_QUICKFIX()<CR>
-nmap c} :call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>:call RESIZE_QUICKFIX()<CR>
-nmap sc} :call SPLIT()\|:call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-P>:lclose<CR>:call RESIZE_QUICKFIX()<CR>
-nmap tc} :tabedit\|:call SEARCH_CLASS('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>:call RESIZE_QUICKFIX()<CR>
-nmap f} :call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>:call RESIZE_QUICKFIX()<CR>
-nmap sf} :call SPLIT()\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-P>:lclose<CR>:call RESIZE_QUICKFIX()<CR>
-nmap tf} :tabedit\|:call SEARCH_FUNC('<C-R>=expand("<cword>")<CR>')<CR>:call SETLOCLIST()<CR><C-W><C-W>:call RESIZE_QUICKFIX()<CR>
-nmap ,sf :call SEARCH_FILE("
-nmap ,sc :call SEARCH_CLASS("
-nmap ,sd :call SEARCH_FUNC("
+nmap } :call SEARCH(0,'<C-R>=expand("<cword>")<CR>')<CR>
+nmap s} :call SPLIT()\|call SEARCH(0,'<C-R>=expand("<cword>")<CR>')<CR>
+nmap t} :tabedit\|call SEARCH(0,'<C-R>=expand("<cword>")<CR>')<CR>
+nmap c} :call SEARCH(2,'<C-R>=expand("<cword>")<CR>')<CR>
+nmap sc} :call SPLIT()\|:call SEARCH(2,'<C-R>=expand("<cword>")<CR>')<CR>
+nmap tc} :tabedit\|call SEARCH(2,'<C-R>=expand("<cword>")<CR>')<CR>
+nmap f} :call SEARCH(1,'<C-R>=expand("<cword>")<CR>')<CR>
+nmap sf} :call SPLIT()\|call SEARCH(1,'<C-R>=expand("<cword>")<CR>')<CR>
+nmap tf} :tabedit\|call SEARCH(1,'<C-R>=expand("<cword>")<CR>')<CR>
 nmap AS :call SPLIT_A()<CR>
 
 "gtag -p
@@ -314,6 +313,19 @@ function! SPLIT_A()
     execute "normal \<c-w>b"
     execute 'A'
 endfunction
+function! SEARCH(type, word)
+    if a:type == 0 "text
+        execute printf('LAck! -g !build -w %s', a:word)
+        call SETLOCLIST(printf('Text: %s', a:word))
+    elseif a:type == 1 "function
+        call SEARCH_FUNC(a:word)
+        call SETLOCLIST(printf('Func: %s', a:word))
+    else "class
+        call SEARCH_CLASS(a:word)
+        call SETLOCLIST(printf('Class: %s', a:word))
+    endif
+    call RESIZE_QUICKFIX()
+endfunction
 command! -nargs=1 SearchFile :call SEARCH_FILE(<q-args>)
 function! SEARCH_FILE(word)
     let old = g:ackprg
@@ -345,8 +357,8 @@ command! -nargs=1 SearchClass :call SEARCH_CLASS(<q-args>)
 function! SEARCH_CLASS(word)
     execute printf(':LAck -g !build "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b"', a:word)
 endfunction
-function! SETLOCLIST()
-    execute "call setloclist(0, [], 'a', {'title': ''})"
+function! SETLOCLIST(word)
+    execute printf("call setloclist(0, [], 'a', {'title': '%s'})", a:word)
 endfunction
 function! DARK()
     execute 'set background=dark'
