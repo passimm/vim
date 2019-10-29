@@ -35,6 +35,8 @@ set splitbelow
 set mouse-=a
 "set mouse=i
 set nu
+set nofixendofline
+set scrolloff=999 "cursor always in middle
 
 if has("gui_running") 
 au GUIEnter * simalt ~x  " 窗口启动时自动最大化 
@@ -319,10 +321,8 @@ function! SEARCH(type, word)
         call SETLOCLIST(printf('Text: %s', a:word))
     elseif a:type == 1 "function
         call SEARCH_FUNC(a:word)
-        call SETLOCLIST(printf('Func: %s', a:word))
     else "class
         call SEARCH_CLASS(a:word)
-        call SETLOCLIST(printf('Class: %s', a:word))
     endif
     call RESIZE_QUICKFIX()
 endfunction
@@ -332,6 +332,7 @@ function! SEARCH_FILE(word)
     let g:ackprg = 'ag --vimgrep --nogroup --nocolor'
     execute printf(':AckFile %s', a:word)
     let g:ackprg = old
+    call SETLOCLIST(printf('File: %s', a:word))
 endfunction
 function! RESIZE_QUICKFIX()
     let width = winwidth(0)
@@ -352,10 +353,12 @@ function! SEARCH_FUNC(word)
         "execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($\|\{\|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
         execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
     endif
+    call SETLOCLIST(printf('Func: %s', a:word))
 endfunction
 command! -nargs=1 SearchClass :call SEARCH_CLASS(<q-args>)
 function! SEARCH_CLASS(word)
     execute printf(':LAck -g !build "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b"', a:word)
+    call SETLOCLIST(printf('Class: %s', a:word))
 endfunction
 function! SETLOCLIST(word)
     execute printf("call setloclist(0, [], 'a', {'title': '%s'})", a:word)
