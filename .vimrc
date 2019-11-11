@@ -34,7 +34,7 @@ set splitright
 set splitbelow
 set mouse-=a
 "set mouse=i
-set nu
+"set nu
 set nofixendofline
 set scrolloff=999 "cursor always in middle
 
@@ -47,7 +47,8 @@ set guioptions-=L " 隐藏左侧滚动条
 set guioptions-=r " 隐藏右侧滚动条 
 set guioptions-=b " 隐藏底部滚动条 
 set showtabline=0 " 隐藏Tab栏
-set guifont=Iosevka:h12:cANSI:qDRAFT
+"set guifont=Iosevka:h12:cANSI:qDRAFT
+set guifont=Source_Code_Pro:h12:cANSI:qDRAFT
 set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
 "set linespace=0
 endif 
