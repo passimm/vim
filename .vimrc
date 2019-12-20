@@ -37,6 +37,9 @@ set mouse-=a
 "set nu
 set nofixendofline
 set scrolloff=999 "cursor always in middle
+"nobackup
+set nobackup
+set nowritebackup
 
 if has("gui_running") 
 au GUIEnter * simalt ~x  " 窗口启动时自动最大化 
@@ -48,7 +51,7 @@ set guioptions-=r " 隐藏右侧滚动条
 set guioptions-=b " 隐藏底部滚动条 
 set showtabline=0 " 隐藏Tab栏
 "set guifont=Iosevka:h12:cANSI:qDRAFT
-set guifont=Source_Code_Pro:h12:cANSI:qDRAFT
+set guifont=Source_Code_Pro:h11:cANSI:qDRAFT
 set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
 "set linespace=0
 endif 
@@ -60,6 +63,7 @@ set statusline+=\[%f:%l
 set statusline+=\ @Col:%c\]
 "set fillchars=stl:,stlnc:,vert:\|,fold:-,diff:-
 set fillchars=vert:\|,fold:-
+set complete=.,w,b,u,t
 
 autocmd BufReadPost *
 \ if line("'\"") > 0 && line ("'\"") <= line("$") |
@@ -151,14 +155,14 @@ let g:gruvbox_contrast_dark="soft"
 "let g:onedark_hide_endofbuffer=1
 "colorscheme onedark
 "################################
-"set background=dark
-"let g:airline_solarized_bg='dark'
-"colorscheme solarized8
-"let g:airline_theme='solarized'
+set background=light
+let g:airline_solarized_bg='light'
+colorscheme solarized8_low
+let g:airline_theme='solarized'
 "colorscheme dracula
 "let g:airline_theme='dracula'
-colorscheme vim-material 
-let g:airline_theme='material'
+"colorscheme vim-material 
+"let g:airline_theme='material'
 
 "vim-airline
 let g:airline_powerline_fonts = 0 " install this first: https://github.com/powerline/fonts
@@ -318,7 +322,7 @@ function! SPLIT_A()
 endfunction
 function! SEARCH(type, word)
     if a:type == 0 "text
-        execute printf('LAck! -g !build -w %s', a:word)
+        execute printf('LAck -w %s', a:word)
         call SETLOCLIST(printf('Text: %s', a:word))
     elseif a:type == 1 "function
         call SEARCH_FUNC(a:word)
@@ -348,17 +352,17 @@ endfunction
 command! -nargs=1 SearchFunc :call SEARCH_FUNC(<q-args>)
 function! SEARCH_FUNC(word)
     if has('win32')
-        "execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
-        execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
+        "execute printf(':LAck -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
+        execute printf(':LAck -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
     else
-        "execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($\|\{\|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
-        execute printf(':LAck -g !build -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
+        "execute printf(':LAck -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($\|\{\|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
+        execute printf(':LAck -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
     endif
     call SETLOCLIST(printf('Func: %s', a:word))
 endfunction
 command! -nargs=1 SearchClass :call SEARCH_CLASS(<q-args>)
 function! SEARCH_CLASS(word)
-    execute printf(':LAck -g !build "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b"', a:word)
+    execute printf(':LAck "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b"', a:word)
     call SETLOCLIST(printf('Class: %s', a:word))
 endfunction
 function! SETLOCLIST(word)
@@ -502,11 +506,11 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:100'
 
 "ack
 if executable('rg')
-  let g:ackprg = 'rg --vimgrep'
+  let g:ackprg = 'rg --vimgrep -g !build'
 endif
-cnoreabbrev ack LAck! -g !build
+cnoreabbrev ack LAck!
 let g:ack_lhandler = "call LACK_OPEN()"
-let g:ackhighlight = 1
+let g:ackhighlight = 0
 
 "typescript-vim
 let g:typescript_indent_disable = 0
