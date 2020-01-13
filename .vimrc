@@ -117,8 +117,7 @@ cab tabe tabl\|tabe
 cab fork :tab split
 cab svn_revert :!svn revert %:p
 cab git_revert :!git checkout -- %:p
-cab tabcloseright .+1,$tabdo :tabc
-cab tabcloseleft 0,.-1tabdo :tabc
+
 if has('win32')
   cab pwd_xtable chdir \*\storage\xstore\src\xtable
   cab pwd_api2 chdir \*\storage\xstore\src\xtable\api\managed2\obj\amd64
@@ -155,14 +154,16 @@ let g:gruvbox_contrast_dark="soft"
 "let g:onedark_hide_endofbuffer=1
 "colorscheme onedark
 "################################
-set background=light
-let g:airline_solarized_bg='light'
-colorscheme solarized8_low
-let g:airline_theme='solarized'
+"set background=light
+"let g:airline_solarized_bg='light'
+"colorscheme solarized8_low
+"let g:airline_theme='solarized'
 "colorscheme dracula
 "let g:airline_theme='dracula'
 "colorscheme vim-material 
 "let g:airline_theme='material'
+colorscheme xcodedark
+let g:airline_theme='molokai'
 
 "vim-airline
 let g:airline_powerline_fonts = 0 " install this first: https://github.com/powerline/fonts
@@ -232,16 +233,24 @@ nmap _ mp
 nmap ss ::call SPLIT()<cr>
 nmap C :tabo\|only\|q<cr>
 nnoremap ,cd :chdir %:p:h\|pwd<cr>
+nnoremap tc :.+1,$tabdo :tabc<cr>
+nnoremap tC :0,.-1tabdo :tabc<cr>
 
+"text
 nmap } :call SEARCH(0,'<C-R>=expand("<cword>")<CR>')<CR>
 nmap s} :call SPLIT()\|call SEARCH(0,'<C-R>=expand("<cword>")<CR>')<CR>
 nmap t} :tabedit\|call SEARCH(0,'<C-R>=expand("<cword>")<CR>')<CR>
+"class
 nmap c} :call SEARCH(2,'<C-R>=expand("<cword>")<CR>')<CR>
 nmap sc} :call SPLIT()\|:call SEARCH(2,'<C-R>=expand("<cword>")<CR>')<CR>
 nmap tc} :tabedit\|call SEARCH(2,'<C-R>=expand("<cword>")<CR>')<CR>
+"func
 nmap f} :call SEARCH(1,'<C-R>=expand("<cword>")<CR>')<CR>
 nmap sf} :call SPLIT()\|call SEARCH(1,'<C-R>=expand("<cword>")<CR>')<CR>
 nmap tf} :tabedit\|call SEARCH(1,'<C-R>=expand("<cword>")<CR>')<CR>
+"instance
+nmap si} :call SPLIT()\|call SEARCH(3,'<C-R>=expand("<cword>")<CR>')<CR>
+nmap ti} :tabedit\|call SEARCH(3,'<C-R>=expand("<cword>")<CR>')<CR>
 nmap AS :call SPLIT_A()<CR>
 
 "gtag -p
@@ -326,6 +335,8 @@ function! SEARCH(type, word)
         call SETLOCLIST(printf('Text: %s', a:word))
     elseif a:type == 1 "function
         call SEARCH_FUNC(a:word)
+    elseif a:type == 3 "instance
+        call SEARCH_INSTANCE(a:word)
     else "class
         call SEARCH_CLASS(a:word)
     endif
@@ -365,9 +376,17 @@ function! SEARCH_CLASS(word)
     execute printf(':LAck "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b"', a:word)
     call SETLOCLIST(printf('Class: %s', a:word))
 endfunction
+
+command! -nargs=1 SearchInstance :call SEARCH_INSTANCE(<q-args>)
+function! SEARCH_INSTANCE(word)
+    execute printf(':LAck -e "[ \(]%s[\(\);\]]" -e "new.*%s" -e "make_(shared|unique)<%s>"', a:word, a:word, a:word)
+    call SETLOCLIST(printf('Instance: %s', a:word))
+endfunction
+
 function! SETLOCLIST(word)
     execute printf("call setloclist(0, [], 'a', {'title': '%s'})", a:word)
 endfunction
+
 function! DARK()
     execute 'set background=dark'
     execute 'colorscheme solarized8'
