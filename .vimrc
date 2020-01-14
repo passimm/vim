@@ -50,8 +50,8 @@ set guioptions-=L " 隐藏左侧滚动条
 set guioptions-=r " 隐藏右侧滚动条 
 set guioptions-=b " 隐藏底部滚动条 
 set showtabline=0 " 隐藏Tab栏
-"set guifont=Iosevka:h12:cANSI:qDRAFT
-set guifont=Source_Code_Pro:h11:cANSI:qDRAFT
+set guifont=Iosevka:h12:cANSI:qDRAFT
+"set guifont=Source_Code_Pro:h11:cANSI:qDRAFT
 set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
 "set linespace=0
 endif 
@@ -186,6 +186,153 @@ let g:airline#extensions#quickfix#location_text = ''
 set encoding=utf-8
 let g:airline#extensions#hunks#enabled=0
 let g:airline#extensions#branch#enabled=1
+
+"lightline
+"{{{lightline.vim
+"{{{lightline.vim-usage
+" :h 'statusline'
+" :h g:lightline.component
+"}}}
+"{{{functions
+
+set showtabline=2
+set showtabline=2  " Show tabline
+set guioptions-=e  " Don't use GUI tabline
+
+
+function! SwitchLightlineColorScheme(color)"{{{
+    let g:lightline.colorscheme = a:color
+    call lightline#init()
+    call lightline#colorscheme()
+    call lightline#update()
+endfunction"}}}
+function! CocCurrentFunction()"{{{
+    return get(b:, 'coc_current_function', '')
+endfunction"}}}
+function! Devicons_Filetype()"{{{
+    " return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . &filetype : 'no ft') : ''
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction"}}}
+function! Devicons_Fileformat()"{{{
+    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction"}}}
+function! Artify_active_tab_num(n) abort"{{{
+    return Artify(a:n, 'bold')." \ue0bb"
+endfunction"}}}
+function! Artify_inactive_tab_num(n) abort"{{{
+    return Artify(a:n, 'double_struck')." \ue0bb"
+endfunction"}}}
+function! Artify_lightline_tab_filename(s) abort"{{{
+    return Artify(lightline#tab#filename(a:s), 'monospace')
+endfunction"}}}
+function! Artify_lightline_mode() abort"{{{
+    return Artify(lightline#mode(), 'monospace')
+endfunction"}}}
+function! Artify_line_percent() abort"{{{
+    return Artify(string((100*line('.'))/line('$')), 'bold')
+endfunction"}}}
+function! Artify_line_num() abort"{{{
+    return Artify(string(line('.')), 'bold')
+endfunction"}}}
+function! Artify_col_num() abort"{{{
+    return Artify(string(getcurpos()[2]), 'bold')
+endfunction"}}}
+function! Artify_gitbranch() abort"{{{
+    if gitbranch#name() !=# ''
+        return Artify(gitbranch#name(), 'monospace')." \ue725"
+    else
+        return "\ue61b"
+    endif
+endfunction"}}}
+"}}}
+set laststatus=2  " Basic
+set noshowmode  " Disable show mode info
+let g:lightline = {}
+let g:lightline.colorscheme = 'wombat'
+let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
+let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
+let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
+let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
+let g:lightline#ale#indicator_checking = "\uf110"
+let g:lightline#ale#indicator_warnings = "\uf529"
+let g:lightline#ale#indicator_errors = "\uf00d"
+let g:lightline#ale#indicator_ok = "\uf00c"
+let g:lightline_gitdiff#indicator_added = '+'
+let g:lightline_gitdiff#indicator_deleted = '-'
+let g:lightline_gitdiff#indicator_modified = '*'
+let g:lightline_gitdiff#min_winwidth = '70'
+let g:lightline#asyncrun#indicator_none = ''
+let g:lightline#asyncrun#indicator_run = 'Running...'
+let g:lightline.active = {
+            \ 'left': [ [ 'artify_mode', 'paste' ],
+            \           [ 'readonly', 'filename', 'modified', 'fileformat', 'devicons_filetype' ] ],
+            \ 'right': [ [ 'artify_lineinfo' ],
+            \           [ 'coc_status' ] ]
+            \ }
+let g:lightline.inactive = {
+            \ 'left': [ [ 'filename' , 'modified', 'fileformat', 'devicons_filetype' ]],
+            \ 'right': [ [ 'artify_lineinfo' ] ]
+            \ }
+let g:lightline.tabline = {
+            \ 'left': [ [ 'tabs' ] ],
+            \ 'right': [ [ 'artify_gitbranch' ] ]
+            \ }
+let g:lightline.tab = {
+            \ 'active': [ 'artify_filename', 'modified' ],
+            \ 'inactive': [ 'filename', 'modified' ] }
+let g:lightline.tab_component = {
+            \ }
+let g:lightline.tab_component_function = {
+            \ 'artify_activetabnum': 'Artify_active_tab_num',
+            \ 'artify_inactivetabnum': 'Artify_inactive_tab_num',
+            \ 'artify_filename': 'Artify_lightline_tab_filename',
+            \ 'filename': 'lightline#tab#filename',
+            \ 'modified': 'lightline#tab#modified',
+            \ 'readonly': 'lightline#tab#readonly',
+            \ 'tabnum': 'lightline#tab#tabnum'
+            \ }
+let g:lightline.component = {
+            \ 'artify_gitbranch' : '%{Artify_gitbranch()}',
+            \ 'artify_mode': '%{Artify_lightline_mode()}',
+            \ 'artify_lineinfo': "%2{Artify_line_percent()}\uf295 %3{Artify_line_num()}:%-2{Artify_col_num()}",
+            \ 'bufinfo': '%{bufname("%")}:%{bufnr("%")}',
+            \ 'vim_logo': "\ue7c5",
+            \ 'mode': '%{lightline#mode()}',
+            \ 'absolutepath': '%F',
+            \ 'relativepath': '%f',
+            \ 'filename': '%t',
+            \ 'filesize': "%{HumanSize(line2byte('$') + len(getline('$')))}",
+            \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
+            \ 'fileformat': '%{&fenc!=#""?&fenc:&enc}[%{&ff}]',
+            \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
+            \ 'modified': '%M',
+            \ 'bufnum': '%n',
+            \ 'paste': '%{&paste?"PASTE":""}',
+            \ 'readonly': '%R',
+            \ 'charvalue': '%b',
+            \ 'charvaluehex': '%B',
+            \ 'percent': '%2p%%',
+            \ 'percentwin': '%P',
+            \ 'spell': '%{&spell?&spelllang:""}',
+            \ 'lineinfo': '%2p%% %3l:%-2v',
+            \ 'line': '%l',
+            \ 'column': '%c',
+            \ 'close': '%999X X ',
+            \ 'winnr': '%{winnr()}'
+            \ }
+let g:lightline.component_function = {
+            \ 'gitbranch': 'gitbranch#name',
+            \ 'devicons_filetype': 'Devicons_Filetype',
+            \ 'devicons_fileformat': 'Devicons_Fileformat',
+            \ 'coc_status': 'coc#status',
+            \ 'coc_currentfunction': 'CocCurrentFunction'
+            \ }
+
+let g:lightline.component_type = {
+            \ 'linter_warnings': 'warning',
+            \ 'linter_errors': 'error'
+            \ }
+"}}}
 
 set diffopt=filler,context:1000000
 if &diff
