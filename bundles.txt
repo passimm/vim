@@ -7,6 +7,7 @@ https://github.com/mattn/emmet-vim.git
 https://github.com/morhetz/gruvbox.git
 https://github.com/Yggdroot/indentLine.git
 https://github.com/itchyny/lightline.vim.git
+https://github.com/macthecadillac/lightline-gitdiff.git
 https://github.com/scrooloose/nerdtree.git
 https://github.com/chrisbra/NrrwRgn.git
 https://github.com/tomtom/tcomment_vim.git

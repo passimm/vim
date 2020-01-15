@@ -237,6 +237,13 @@ endfunction"}}}
 function! Artify_col_num() abort"{{{
     return Artify(string(getcurpos()[2]), 'bold')
 endfunction"}}}
+function! Quickfix_Title() abort"{{{
+    if &buftype == "quickfix"
+        return w:quickfix_title
+    else
+        return expand('%:t')
+    endif
+endfunction"}}}
 function! Artify_gitbranch() abort"{{{
     if gitbranch#name() !=# ''
         return Artify(gitbranch#name(), 'monospace')." \ue725"
@@ -265,17 +272,16 @@ let g:lightline#asyncrun#indicator_none = ''
 let g:lightline#asyncrun#indicator_run = 'Running...'
 let g:lightline.active = {
             \ 'left': [ [ 'artify_mode', 'paste' ],
-            \           [ 'readonly', 'filename', 'modified', 'fileformat', 'devicons_filetype' ] ],
-            \ 'right': [ [ 'artify_lineinfo' ],
-            \           [ 'coc_status' ] ]
+            \           [ 'readonly', 'quickfix_title', 'modified' ] ],
+            \ 'right': [ ['artify_lineinfo' ], [ 'fileformat', 'devicons_filetype']]
             \ }
 let g:lightline.inactive = {
-            \ 'left': [ [ 'filename' , 'modified', 'fileformat', 'devicons_filetype' ]],
+            \ 'left': [ [ 'quickfix_title' , 'modified', 'fileformat', 'devicons_filetype' ]],
             \ 'right': [ [ 'artify_lineinfo' ] ]
             \ }
 let g:lightline.tabline = {
             \ 'left': [ [ 'tabs' ] ],
-            \ 'right': [ [ 'artify_gitbranch' ] ]
+            \ 'right': [ [ 'artify_gitbranch'], ['gitstatus' ]]
             \ }
 let g:lightline.tab = {
             \ 'active': [ 'artify_filename', 'modified' ],
@@ -301,6 +307,7 @@ let g:lightline.component = {
             \ 'absolutepath': '%F',
             \ 'relativepath': '%f',
             \ 'filename': '%t',
+            \ 'quickfix_title': '%{Quickfix_Title()}',
             \ 'filesize': "%{HumanSize(line2byte('$') + len(getline('$')))}",
             \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
             \ 'fileformat': '%{&fenc!=#""?&fenc:&enc}[%{&ff}]',
@@ -318,6 +325,8 @@ let g:lightline.component = {
             \ 'line': '%l',
             \ 'column': '%c',
             \ 'close': '%999X X ',
+            \ 'time': '%{strftime("%c")}',
+            \ 'gitstatus' : '%{lightline_gitdiff#get_status()}',
             \ 'winnr': '%{winnr()}'
             \ }
 let g:lightline.component_function = {
