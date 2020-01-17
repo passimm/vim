@@ -5,7 +5,7 @@ set noic
 "General Settings
 :filetype plugin on
 :syntax on
-"this line disable BG color erase,to enable tmux use colorschema's bg color
+"this line disable BG color erase,to enable tmux use colorscheme's bg color
 set t_ut=
 "set cursorline
 set showcmd
@@ -162,8 +162,11 @@ let g:gruvbox_contrast_dark="soft"
 "let g:airline_theme='dracula'
 "colorscheme vim-material 
 "let g:airline_theme='material'
+"######################################
 colorscheme xcodedark
 let g:airline_theme='molokai'
+"#############################
+colorscheme onehalfdark
 
 "vim-airline
 let g:airline_powerline_fonts = 0 " install this first: https://github.com/powerline/fonts
@@ -255,7 +258,7 @@ endfunction"}}}
 set laststatus=2  " Basic
 set noshowmode  " Disable show mode info
 let g:lightline = {}
-let g:lightline.colorscheme = 'wombat'
+let g:lightline.colorscheme = "onehalfdark"
 let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
 let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
 let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
@@ -273,7 +276,7 @@ let g:lightline#asyncrun#indicator_run = 'Running...'
 let g:lightline.active = {
             \ 'left': [ [ 'artify_mode', 'paste' ],
             \           [ 'readonly', 'quickfix_title', 'modified' ] ],
-            \ 'right': [ ['artify_lineinfo' ], [ 'fileformat', 'devicons_filetype']]
+            \ 'right': [ ['artify_lineinfo' ], ['devicons_filetype'], [ 'fileformat'] ]
             \ }
 let g:lightline.inactive = {
             \ 'left': [ [ 'quickfix_title' , 'modified', 'fileformat', 'devicons_filetype' ]],
@@ -529,7 +532,7 @@ function! SEARCH_FUNC(word)
 endfunction
 command! -nargs=1 SearchClass :call SEARCH_CLASS(<q-args>)
 function! SEARCH_CLASS(word)
-    execute printf(':LAck "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b"', a:word)
+    execute printf(':LAck "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]"', a:word)
     call SETLOCLIST(printf('Class: %s', a:word))
 endfunction
 

@@ -10,6 +10,7 @@ https://github.com/itchyny/lightline.vim.git
 https://github.com/macthecadillac/lightline-gitdiff.git
 https://github.com/scrooloose/nerdtree.git
 https://github.com/chrisbra/NrrwRgn.git
+https://github.com/passimm/onehalf_vim.git
 https://github.com/tomtom/tcomment_vim.git
 https://github.com/leafgarland/typescript-vim.git
 https://github.com/vim-airline/vim-airline-themes
