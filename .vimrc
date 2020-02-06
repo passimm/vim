@@ -532,7 +532,11 @@ function! SEARCH_FUNC(word)
 endfunction
 command! -nargs=1 SearchClass :call SEARCH_CLASS(<q-args>)
 function! SEARCH_CLASS(word)
-    execute printf(':LAck "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]"', a:word)
+    if has('win32')
+        execute printf(':LAck "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]"', a:word)
+    else
+        execute printf(':LAck "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]*$"', a:word)
+    endif
     call SETLOCLIST(printf('Class: %s', a:word))
 endfunction
 
