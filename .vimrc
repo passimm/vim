@@ -501,12 +501,11 @@ function! SEARCH(type, word)
     endif
     call RESIZE_QUICKFIX()
 endfunction
-command! -nargs=1 SearchFile :call SEARCH_FILE(<q-args>)
+command! -nargs=1 SF :call SEARCH_FILE(<q-args>)
 function! SEARCH_FILE(word)
-    let old = g:ackprg
     let g:ackprg = 'ag --vimgrep --nogroup --nocolor'
     execute printf(':AckFile %s', a:word)
-    let g:ackprg = old
+    let g:ackprg = 'rg --vimgrep -g !build'
     call SETLOCLIST(printf('File: %s', a:word))
 endfunction
 function! RESIZE_QUICKFIX()
