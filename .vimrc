@@ -394,6 +394,7 @@ nmap C :tabo\|only\|q<cr>
 nnoremap ,cd :chdir %:p:h\|pwd<cr>
 nnoremap tc :.+1,$tabdo :tabc<cr>
 nnoremap tC :0,.-1tabdo :tabc<cr>
+nnoremap ,o :only\|tabo<cr>
 
 "text
 nmap } :call SEARCH(0,'<C-R>=expand("<cword>")<CR>')<CR>
