@@ -514,7 +514,7 @@ function! RESIZE_QUICKFIX()
     let height = winheight(0)
     let ratio = width/height
     if (ratio > 2)
-        :windo if &buftype == "quickfix" | lopen 5 | endif
+        :windo if &buftype == "quickfix" | lopen 10 | endif
     else
         :windo if &buftype == "quickfix" | lopen 15 | endif
     endif
@@ -523,10 +523,12 @@ command! -nargs=1 SearchFunc :call SEARCH_FUNC(<q-args>)
 function! SEARCH_FUNC(word)
     if has('win32')
         "execute printf(':LAck -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
-        execute printf(':LAck -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
+        "execute printf(':LAck -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
+        execute printf(':LAck -e "^[^=]+(\s|::)%s\s*($|\(|const)"', a:word)
     else
         "execute printf(':LAck -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($\|\{\|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
-        execute printf(':LAck -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
+        "execute printf(':LAck -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*($|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*$"', a:word, a:word)
+        execute printf(':LAck -e "^[^=]+(\s|::)%s\s*($|\(|const)"', a:word)
     endif
     call SETLOCLIST(printf('Func: %s', a:word))
 endfunction
@@ -542,7 +544,7 @@ endfunction
 
 command! -nargs=1 SearchInstance :call SEARCH_INSTANCE(<q-args>)
 function! SEARCH_INSTANCE(word)
-    execute printf(':LAck -e "[ \(]%s[\(\);\]]" -e "new.*%s" -e "make_(shared|unique)<%s>"', a:word, a:word, a:word)
+    execute printf(':LAck -e "[ \(]%s[\(\);\]]" -e "[nN]ew.*\b%s\b" -e "make_(shared|unique)<%s>" -e "\b%s [a-zA-Z_]*(\(|;)" -e ":\s*(public|private|protected)\s*\b%s\b"', a:word, a:word, a:word, a:word, a:word)
     call SETLOCLIST(printf('Instance: %s', a:word))
 endfunction
 
@@ -600,7 +602,7 @@ function! LACK_OPEN()
     let height = winheight(0)
     let ratio = width/height
     if (ratio > 2)
-        :top lopen 5
+        :top lopen 10
     else
         :top lopen 15
     endif
