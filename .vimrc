@@ -390,7 +390,7 @@ nmap = ]c
 nmap + mn
 nmap _ mp
 nmap ss ::call SPLIT()<cr>
-nmap C :tabo\|only\|q<cr>
+nnoremap "" :qa<cr>
 nnoremap ,cd :chdir %:p:h\|pwd<cr>
 nnoremap tc :.+1,$tabdo :tabc<cr>
 nnoremap tC :0,.-1tabdo :tabc<cr>
