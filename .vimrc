@@ -680,10 +680,11 @@ let g:ctrlp_regexp = 1
 let g:ctrlp_working_path_mode = ''
 "let g:ctrlp_custom_ignore = '\v[\/](\.(git|hg|svn)|node_modules\/.*)$'
 if has('win32')
-    let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d | findstr /v /i /r "out[\\] \.git[\\] exe$ so$ dll$ pdb$ lib$ sln$ projhash$ slnhash$ userData$ assemblies$"'
+    "let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d | findstr /v /i /r "out[\\] \.git[\\] exe$ so$ dll$ pdb$ lib$ sln$ projhash$ slnhash$ userData$ assemblies$"'
 else
-    let g:ctrlp_user_command = 'find %s -type f|grep -v -e \/node_modules\/ | grep -v -e \/build\/'
+    "let g:ctrlp_user_command = 'find %s -type f|grep -v -e \/node_modules\/ | grep -v -e \/build\/'
 endif
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:100'

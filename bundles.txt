@@ -2,7 +2,7 @@ https://github.com/mileszs/ack.vim.git
 https://github.com/rking/ag.vim.git
 https://github.com/w0rp/ale.git
 https://github.com/sainnhe/artify.vim.git
-https://github.com/kien/ctrlp.vim.git
+https://github.com/ctrlpvim/ctrlp.vim.git
 https://github.com/mattn/emmet-vim.git
 https://github.com/morhetz/gruvbox.git
 https://github.com/Yggdroot/indentLine.git
@@ -15,7 +15,6 @@ https://github.com/tomtom/tcomment_vim.git
 https://github.com/leafgarland/typescript-vim.git
 https://github.com/vim-airline/vim-airline-themes
 https://github.com/vim-scripts/vim-auto-save.git
-https://github.com/arzg/vim-colors-xcode.git
 https://github.com/octol/vim-cpp-enhanced-highlight.git
 https://github.com/ryanoasis/vim-devicons.git
 https://github.com/tpope/vim-fugitive.git
@@ -23,5 +22,4 @@ https://github.com/itchyny/vim-gitbranch.git
 https://github.com/pangloss/vim-javascript.git
 https://github.com/MaxMEllon/vim-jsx-pretty.git
 https://github.com/passimm/vim-material.git
-https://github.com/patstockwell/vim-monokai-tasty.git
 https://github.com/lifepillar/vim-solarized8.git
