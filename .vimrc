@@ -677,7 +677,7 @@ inoremap <buffer> <C-S-Space> <C-X><C-U><C-P>
 
 "ctrlp
 let g:ctrlp_regexp = 1
-let g:ctrlp_working_path_mode = ''
+let g:ctrlp_working_path_mode = 'ra'
 "let g:ctrlp_custom_ignore = '\v[\/](\.(git|hg|svn)|node_modules\/.*)$'
 if has('win32')
     "let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d | findstr /v /i /r "out[\\] \.git[\\] exe$ so$ dll$ pdb$ lib$ sln$ projhash$ slnhash$ userData$ assemblies$"'
