@@ -162,9 +162,6 @@ let g:gruvbox_contrast_dark="soft"
 "let g:airline_theme='dracula'
 "colorscheme vim-material 
 "let g:airline_theme='material'
-"######################################
-colorscheme xcodedark
-let g:airline_theme='molokai'
 "#############################
 colorscheme onehalfdark
 
