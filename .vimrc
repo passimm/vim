@@ -1,4 +1,39 @@
-execute pathogen#infect()
+if has("gui_running") 
+    call plug#begin('~\vimfiles\plugged')
+else
+    call plug#begin('~/.vim/plugged')
+endif
+
+Plug 'https://github.com/mileszs/ack.vim.git'
+Plug 'https://github.com/rking/ag.vim.git'
+Plug 'https://github.com/w0rp/ale.git'
+Plug 'https://github.com/sainnhe/artify.vim.git'
+Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
+Plug 'https://github.com/mattn/emmet-vim.git'
+Plug 'https://github.com/morhetz/gruvbox.git'
+Plug 'https://github.com/Yggdroot/indentLine.git'
+Plug 'https://github.com/itchyny/lightline.vim.git'
+Plug 'https://github.com/macthecadillac/lightline-gitdiff.git'
+Plug 'https://github.com/scrooloose/nerdtree.git'
+Plug 'https://github.com/haishanh/night-owl.vim.git'
+Plug 'https://github.com/chrisbra/NrrwRgn.git'
+Plug 'https://github.com/passimm/onehalf_vim.git'
+Plug 'https://github.com/majutsushi/tagbar.git'
+Plug 'https://github.com/tomtom/tcomment_vim.git'
+Plug 'https://github.com/leafgarland/typescript-vim.git'
+Plug 'https://github.com/vim-airline/vim-airline-themes'
+Plug 'https://github.com/vim-scripts/vim-auto-save.git'
+Plug 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
+Plug 'https://github.com/ryanoasis/vim-devicons.git'
+Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'https://github.com/itchyny/vim-gitbranch.git'
+Plug 'https://github.com/pangloss/vim-javascript.git'
+Plug 'https://github.com/MaxMEllon/vim-jsx-pretty.git'
+Plug 'https://github.com/sheerun/vim-polyglot.git'
+Plug 'https://github.com/lifepillar/vim-solarized8.git'
+
+call plug#end()
+
 set nocp
 "don't ignore case when searching
 set noic
@@ -163,7 +198,11 @@ let g:gruvbox_contrast_dark="soft"
 "colorscheme vim-material 
 "let g:airline_theme='material'
 "#############################
-colorscheme onehalfdark
+"colorscheme onehalfdark
+"let g:equinusocio_material_darker = 1
+"colorscheme equinusocio_material
+"let g:equinusocio_material_hide_vertsplit = 1
+colorscheme night-owl
 
 "vim-airline
 let g:airline_powerline_fonts = 0 " install this first: https://github.com/powerline/fonts
@@ -255,7 +294,7 @@ endfunction"}}}
 set laststatus=2  " Basic
 set noshowmode  " Disable show mode info
 let g:lightline = {}
-let g:lightline.colorscheme = "onehalfdark"
+let g:lightline.colorscheme = "nightowl"
 let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
 let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
 let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
@@ -450,12 +489,7 @@ autocmd FileType python set omnifunc=python3complete#Complete
 
 "------------------------------------------------------------------------------------------------------
 "------------------------------------------------------------------------------------------------------
-call pathogen#helptags()
 "Plugin Settings
-"taglist
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Use_Right_Window=0
 
 "CScope
 set cscopequickfix=s-,c-,d-,i-,t-,e-
