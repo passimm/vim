@@ -432,6 +432,7 @@ nnoremap ,cd :chdir %:p:h\|pwd<cr>
 nnoremap tc :.+1,$tabdo :tabc<cr>
 nnoremap tC :0,.-1tabdo :tabc<cr>
 nnoremap ,o :only\|tabo<cr>
+nnoremap L :call ToggleList("Location List", 'l')<CR>
 
 "text
 nmap } :call SEARCH(0,'<C-R>=expand("<cword>")<CR>')<CR>
@@ -521,10 +522,19 @@ function! SPLIT_A()
     execute "normal \<c-w>b"
     execute 'A'
 endfunction
+function! CLEAR_ALL_QLIST()
+    "clear all qlist in current tab
+    let noneqcount=0
+    let totalw = winnr('$')
+    let oldw = winnr()
+    :windo if &buftype != "quickfix" | let noneqcount=noneqcount+1 | lcl | endif
+    let oldw = oldw+noneqcount-totalw
+    execute printf('exe %d . "wincmd w"', oldw)
+    "echom printf('before search: %d', winnr())
+endfunction
 function! SEARCH(type, word)
     if a:type == 0 "text
-        execute printf('LAck -w %s', a:word)
-        call SETLOCLIST(printf('Text: %s', a:word))
+        call SEARCH_TEXT(a:word)
     elseif a:type == 1 "function
         call SEARCH_FUNC(a:word)
     elseif a:type == 3 "instance
@@ -532,27 +542,53 @@ function! SEARCH(type, word)
     else "class
         call SEARCH_CLASS(a:word)
     endif
+endfunction
+command! -nargs=1 SearchText :call SEARCH_TEXT(<q-args>)
+function! SEARCH_TEXT(word)
+    call CLEAR_ALL_QLIST()
+
+    execute printf('LAck %s', a:word)
+    call SETLOCLIST(printf('Text: %s', a:word))
+
+    " jump back to main window.
+    " currently we're in qfix window, 'lcl' here
+    " will move the cursor to first window, we don't like that
+    :wincmd p
     call RESIZE_QUICKFIX()
 endfunction
 command! -nargs=1 SF :call SEARCH_FILE(<q-args>)
 function! SEARCH_FILE(word)
+    call CLEAR_ALL_QLIST()
+
     let g:ackprg = 'ag --vimgrep --nogroup --nocolor'
     execute printf(':AckFile %s', a:word)
     let g:ackprg = 'rg --vimgrep -g !build'
     call SETLOCLIST(printf('File: %s', a:word))
+
+    " jump back to main window.
+    " currently we're in qfix window, 'lcl' here
+    " will move the cursor to first window, we don't like that
+    :wincmd p
+    call RESIZE_QUICKFIX()
 endfunction
 function! RESIZE_QUICKFIX()
-    let width = winwidth(0)
-    let height = winheight(0)
-    let ratio = width/height
-    if (ratio > 2)
-        :windo if &buftype == "quickfix" | lopen 10 | endif
+    if len(tabpagebuflist()) > 2 
+        lcl
     else
-        :windo if &buftype == "quickfix" | lopen 15 | endif
+        let width = winwidth(0)
+        let height = winheight(0)
+        let ratio = width/height
+        if (ratio > 2)
+            :windo if &buftype == "quickfix" | top lopen 10 | endif
+        else
+            :windo if &buftype == "quickfix" | top lopen 15 | endif
+        endif
     endif
 endfunction
 command! -nargs=1 SearchFunc :call SEARCH_FUNC(<q-args>)
 function! SEARCH_FUNC(word)
+    call CLEAR_ALL_QLIST()
+
     if has('win32')
         "execute printf(':LAck -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r\|\{\|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
         "execute printf(':LAck -e "[^= \t]+ +(\S+::)*%s\s*\([^()]*\)\s*(\r|\{|const)" -e "[^= \t]+ +(\S+::)*%s\s*\(\s*\r"', a:word, a:word)
@@ -563,21 +599,43 @@ function! SEARCH_FUNC(word)
         execute printf(':LAck -e "^[^=]+(\s|::)%s\s*($|\(|const)"', a:word)
     endif
     call SETLOCLIST(printf('Func: %s', a:word))
+
+    " jump back to main window.
+    " currently we're in qfix window, 'lcl' here
+    " will move the cursor to first window, we don't like that
+    :wincmd p
+    call RESIZE_QUICKFIX()
 endfunction
 command! -nargs=1 SearchClass :call SEARCH_CLASS(<q-args>)
 function! SEARCH_CLASS(word)
+    call CLEAR_ALL_QLIST()
+
     if has('win32')
         execute printf(':LAck "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]"', a:word)
     else
         execute printf(':LAck "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]*$"', a:word)
     endif
     call SETLOCLIST(printf('Class: %s', a:word))
+
+    " jump back to main window.
+    " currently we're in qfix window, 'lcl' here
+    " will move the cursor to first window, we don't like that
+    :wincmd p
+    call RESIZE_QUICKFIX()
 endfunction
 
 command! -nargs=1 SearchInstance :call SEARCH_INSTANCE(<q-args>)
 function! SEARCH_INSTANCE(word)
+    call CLEAR_ALL_QLIST()
+
     execute printf(':LAck -e "[ \(]%s[\(\);\]]" -e "[nN]ew.*\b%s\b" -e "make_(shared|unique)<%s>" -e "\b%s [a-zA-Z_]*(\(|;)" -e ":\s*(public|private|protected)\s*\b%s\b"', a:word, a:word, a:word, a:word, a:word)
     call SETLOCLIST(printf('Instance: %s', a:word))
+
+    " jump back to main window.
+    " currently we're in qfix window, 'lcl' here
+    " will move the cursor to first window, we don't like that
+    :wincmd p
+    call RESIZE_QUICKFIX()
 endfunction
 
 function! SETLOCLIST(word)
@@ -672,6 +730,32 @@ function DeleteHiddenBuffers()
     for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
         silent execute 'bwipeout' buf
     endfor
+endfunction
+function! GetBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec('top '.a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
 endfunction
 
 
