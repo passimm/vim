@@ -519,16 +519,19 @@ let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 "gtags
 function! SPLIT_A()
     execute 'call SPLIT()'
-    execute "normal \<c-w>b"
+    "execute "normal \<c-w>b"
     execute 'A'
 endfunction
 function! CLEAR_ALL_QLIST()
     "clear all qlist in current tab
     let noneqcount=0
+    let qcount=0
     let totalw = winnr('$')
     let oldw = winnr()
-    :windo if &buftype != "quickfix" | let noneqcount=noneqcount+1 | lcl | endif
-    let oldw = oldw+noneqcount-totalw
+    ":windo if &buftype != "quickfix" | let noneqcount=noneqcount+1 | endif
+    "let oldw = oldw+noneqcount-totalw
+    :windo if &buftype == "quickfix" | let qcount=qcount+1 | lcl | endif
+    let oldw = oldw-qcount
     execute printf('exe %d . "wincmd w"', oldw)
     "echom printf('before search: %d', winnr())
 endfunction
@@ -611,9 +614,9 @@ function! SEARCH_CLASS(word)
     call CLEAR_ALL_QLIST()
 
     if has('win32')
-        execute printf(':LAck "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]"', a:word)
+        execute printf(':LAck -e "(class|struct|enum|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]" -e "typedef.*%s;"', a:word, a:word)
     else
-        execute printf(':LAck "(class|struct|enum|typedef|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]*$"', a:word)
+        execute printf(':LAck "(class|struct|enum|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]*$" -e "typedef.*%s;"', a:word, a:word)
     endif
     call SETLOCLIST(printf('Class: %s', a:word))
 
@@ -856,3 +859,6 @@ let g:ale_open_list = 1
 let g:auto_save = 1
 let g:auto_save_no_updatetime = 1
 let g:auto_save_in_insert_mode = 1
+
+"tagbar
+let g:tagbar_width = 60
