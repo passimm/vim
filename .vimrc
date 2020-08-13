@@ -433,6 +433,7 @@ nnoremap tc :.+1,$tabdo :tabc<cr>
 nnoremap tC :0,.-1tabdo :tabc<cr>
 nnoremap ,o :only\|tabo<cr>
 nnoremap L :call ToggleList("Location List", 'l')<CR>
+nnoremap ,mm /\v(\<\<\<\<\<\<\<\|\>\>\>\>\>\>\>\>\|\=\=\=\=\=\=\=\=\|\\|\\|\\|\\|\\|\\|\\|\\|\v)<cr>
 
 "text
 nmap } :call SEARCH(0,'<C-R>=expand("<cword>")<CR>')<CR>
