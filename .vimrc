@@ -31,6 +31,7 @@ Plug 'https://github.com/pangloss/vim-javascript.git'
 Plug 'https://github.com/MaxMEllon/vim-jsx-pretty.git'
 Plug 'https://github.com/sheerun/vim-polyglot.git'
 Plug 'https://github.com/lifepillar/vim-solarized8.git'
+Plug 'https://github.com/NLKNguyen/papercolor-theme.git'
 
 call plug#end()
 
@@ -203,7 +204,9 @@ let g:gruvbox_contrast_dark="soft"
 "let g:equinusocio_material_darker = 1
 "colorscheme equinusocio_material
 "let g:equinusocio_material_hide_vertsplit = 1
-colorscheme night-owl
+"colorscheme night-owl
+set background=light
+colorscheme solarized8
 
 "vim-airline
 let g:airline_powerline_fonts = 0 " install this first: https://github.com/powerline/fonts
@@ -295,7 +298,8 @@ endfunction"}}}
 set laststatus=2  " Basic
 set noshowmode  " Disable show mode info
 let g:lightline = {}
-let g:lightline.colorscheme = "nightowl"
+"let g:lightline.colorscheme = "nightowl"
+let g:lightline.colorscheme = "solarized"
 let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
 let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
 let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
