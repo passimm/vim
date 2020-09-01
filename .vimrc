@@ -31,7 +31,7 @@ Plug 'https://github.com/pangloss/vim-javascript.git'
 Plug 'https://github.com/MaxMEllon/vim-jsx-pretty.git'
 Plug 'https://github.com/sheerun/vim-polyglot.git'
 Plug 'https://github.com/lifepillar/vim-solarized8.git'
-Plug 'https://github.com/NLKNguyen/papercolor-theme.git'
+Plug 'https://github.com/patstockwell/vim-monokai-tasty.git'
 
 call plug#end()
 
@@ -165,49 +165,6 @@ else
   cab pwd_all chdir src
 endif
 
-
-"imm color
-syntax on
-set termguicolors
-set background=dark
-"###########
-let g:gruvbox_italic=0
-let g:gruvbox_bold=0
-let g:gruvbox_contrast_dark="soft"
-"colo gruvbox
-"let g:gruvbox_contrast_dark="hard"
-"let g:gruvbox_contrast_dark="medium"
-"let g:gruvbox_contrast_dark="soft"
-"let g:gruvbox_contrast_light="soft"
-"colo gruvbox
-"###############################
-"let g:molokai_original = 1
-"let g:rehash256 = 1
-"color molokai
-"###############################
-"colorscheme codedark
-"let g:airline_theme='codedark'
-"################################
-"let g:onedark_hide_endofbuffer=1
-"colorscheme onedark
-"################################
-"set background=light
-"let g:airline_solarized_bg='light'
-"colorscheme solarized8_low
-"let g:airline_theme='solarized'
-"colorscheme dracula
-"let g:airline_theme='dracula'
-"colorscheme vim-material 
-"let g:airline_theme='material'
-"#############################
-"colorscheme onehalfdark
-"let g:equinusocio_material_darker = 1
-"colorscheme equinusocio_material
-"let g:equinusocio_material_hide_vertsplit = 1
-"colorscheme night-owl
-set background=light
-colorscheme solarized8
-
 "vim-airline
 let g:airline_powerline_fonts = 0 " install this first: https://github.com/powerline/fonts
 let g:airline_section_c = '%f'
@@ -297,9 +254,21 @@ endfunction"}}}
 "}}}
 set laststatus=2  " Basic
 set noshowmode  " Disable show mode info
+
+"imm color
+syntax on
+set termguicolors
+set background=dark
+
+colorscheme night-owl
+" set background=light
+" colorscheme solarized8
+" colorscheme vim-monokai-tasty
+
 let g:lightline = {}
-"let g:lightline.colorscheme = "nightowl"
-let g:lightline.colorscheme = "solarized"
+let g:lightline.colorscheme = "nightowl"
+"let g:lightline.colorscheme = "monokai_tasty"
+"let g:lightline.colorscheme = "solarized"
 let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
 let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
 let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
