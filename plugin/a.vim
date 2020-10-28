@@ -777,6 +777,8 @@ function! <SID>FindOrCreateBuffer(fileName, doSplit, findSimilar)
         endif
      endfor
      " switch the the tab containing the buffer
+     " [imm] always open new
+     let tabNr = -1
      if (tabNr != -1)
         execute "tabn ".tabNr
      endif
