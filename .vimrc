@@ -77,6 +77,7 @@ set scrolloff=999 "cursor always in middle
 "nobackup
 set nobackup
 set nowritebackup
+set shortmess=a
 
 if has("gui_running") 
 au GUIEnter * simalt ~x  " 窗口启动时自动最大化 
@@ -229,6 +230,9 @@ endfunction"}}}
 function! Artify_lightline_mode() abort"{{{
     return Artify(lightline#mode(), 'monospace')
 endfunction"}}}
+function! Artify_AutoSave() abort"{{{
+    return g:auto_save > 0 ? Artify("AutoSave:", 'sans_serif').Artify('ON', 'italic') : Artify("AutoSave:", 'sans_serif').Artify('OFF', 'italic')
+endfunction"}}}
 function! Artify_line_percent() abort"{{{
     return Artify(string((100*line('.'))/line('$')), 'bold')
 endfunction"}}}
@@ -285,7 +289,7 @@ let g:lightline#asyncrun#indicator_run = 'Running...'
 let g:lightline.active = {
             \ 'left': [ [ 'artify_mode', 'paste' ],
             \           [ 'readonly', 'quickfix_title', 'modified' ] ],
-            \ 'right': [ ['artify_lineinfo' ], ['devicons_filetype'], [ 'fileformat'] ]
+            \ 'right': [ ['artify_lineinfo' ], ['devicons_filetype'], [ 'fileformat'], [ 'autosave'] ]
             \ }
 let g:lightline.inactive = {
             \ 'left': [ [ 'quickfix_title' , 'modified', 'fileformat', 'devicons_filetype' ]],
@@ -323,6 +327,7 @@ let g:lightline.component = {
             \ 'filesize': "%{HumanSize(line2byte('$') + len(getline('$')))}",
             \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
             \ 'fileformat': '%{&fenc!=#""?&fenc:&enc}[%{&ff}]',
+            \ 'autosave': '%{Artify_AutoSave()}',
             \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
             \ 'modified': '%M',
             \ 'bufnum': '%n',
@@ -735,6 +740,15 @@ function! ToggleList(bufname, pfx)
   endif
 endfunction
 
+function! AutoToggleAutoSave()
+  let line = line('$')
+  if (line > 20000)
+    let g:auto_save = 0
+  else
+    let g:auto_save = 1
+  endif
+endfunction
+
 
 "ctags/cscope switcher
 set tags=./tags;
@@ -836,3 +850,6 @@ let g:auto_save_in_insert_mode = 1
 
 "tagbar
 let g:tagbar_width = 60
+
+"autocmd
+autocmd BufEnter * call AutoToggleAutoSave()
