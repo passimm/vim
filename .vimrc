@@ -32,6 +32,7 @@ Plug 'https://github.com/MaxMEllon/vim-jsx-pretty.git'
 Plug 'https://github.com/sheerun/vim-polyglot.git'
 Plug 'https://github.com/lifepillar/vim-solarized8.git'
 Plug 'https://github.com/patstockwell/vim-monokai-tasty.git'
+Plug 'https://github.com/cormacrelf/vim-colors-github.git'
 
 call plug#end()
 
@@ -90,7 +91,7 @@ set showtabline=0 " 隐藏Tab栏
 set guifont=FantasqueSansMono_NF:h12:cANSI:qDRAFT
 "set guifont=Source_Code_Pro:h11:cANSI:qDRAFT
 set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
-"set linespace=0
+set linespace=5
 endif 
 
 set statusline=
@@ -267,12 +268,10 @@ colorscheme night-owl
 
 let g:lightline = {}
 let g:lightline.colorscheme = "nightowl"
-"let g:lightline.colorscheme = "monokai_tasty"
-"let g:lightline.colorscheme = "solarized"
-let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
-let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
-let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
-let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
+" let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
+" let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
+" let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
+" let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
 let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_warnings = "\uf529"
 let g:lightline#ale#indicator_errors = "\uf00d"
