@@ -77,7 +77,7 @@ set scrolloff=999 "cursor always in middle
 "nobackup
 set nobackup
 set nowritebackup
-set shortmess=a
+"set shortmess=a
 
 if has("gui_running") 
 au GUIEnter * simalt ~x  " 窗口启动时自动最大化 
@@ -744,8 +744,6 @@ function! AutoToggleAutoSave()
   let line = line('$')
   if (line > 20000)
     let g:auto_save = 0
-  else
-    let g:auto_save = 1
   endif
 endfunction
 
