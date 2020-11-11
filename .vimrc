@@ -81,12 +81,15 @@ set nowritebackup
 
 if has("gui_running") 
 au GUIEnter * simalt ~x  " 窗口启动时自动最大化 
+autocmd GUIEnter * call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)
 au VimResized * wincmd =  "evenly resize each window
 set guioptions-=m " 隐藏菜单栏 
 set guioptions-=T " 隐藏工具栏 
 set guioptions-=L " 隐藏左侧滚动条 
 set guioptions-=r " 隐藏右侧滚动条 
 set guioptions-=b " 隐藏底部滚动条 
+set guioptions-=t " 隐藏底部滚动条 
+set guioptions-=g " 隐藏底部滚动条 
 set showtabline=0 " 隐藏Tab栏
 "set guifont=Iosevka:h11:cANSI:qDRAFT
 set guifont=FantasqueSansMono_NF:h12:cANSI:qDRAFT
