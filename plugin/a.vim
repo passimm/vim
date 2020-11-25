@@ -785,6 +785,7 @@ function! <SID>FindOrCreateBuffer(fileName, doSplit, findSimilar)
 
      " Buffer was already open......check to see if it is in a window
      let bufWindow = bufwinnr(bufNr)
+     let bufWindow = -1
      if (bufWindow == -1) 
         " Buffer was not in a window so open one
         let v:errmsg=""
