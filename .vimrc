@@ -71,7 +71,7 @@ set splitright
 set splitbelow
 set mouse-=a
 "set mouse=i
-"set nu
+set nu
 set nofixendofline
 set scrolloff=999 "cursor always in middle
 "nobackup
@@ -412,7 +412,7 @@ nnoremap tc :.+1,$tabdo :tabc<cr>
 nnoremap tC :0,.-1tabdo :tabc<cr>
 nnoremap ,o :only\|tabo<cr>
 nnoremap L :call ToggleList("Location List", 'l')<CR>
-nnoremap ,mm /\v(\<\<\<\<\<\<\<\|\>\>\>\>\>\>\>\>\|\=\=\=\=\=\=\=\=\|\\|\\|\\|\\|\\|\\|\\|\\|\v)<cr>
+nnoremap ,mm /\v(\<\<\<\<\<\<\<\|\>\>\>\>\>\>\>\|\=\=\=\=\=\=\=\|\\|\\|\\|\\|\\|\\|\\|\v)<cr>
 nnoremap ed :edit %:p:h<cr>
 
 "text
