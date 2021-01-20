@@ -670,6 +670,9 @@ function! SPLIT()
     else
         :split
     endif
+    if winnr('$') > 2
+        :set nonu
+    endif
 endfunction
 function! LACK_OPEN()
     let width = winwidth(0)
@@ -749,6 +752,13 @@ function! AutoToggleAutoSave()
   endif
 endfunction
 
+function! AdjustNu()
+    if winnr('$') > 2
+        :windo set nonu
+    else
+        :windo set nu
+    endif
+endfunction
 
 "ctags/cscope switcher
 set tags=./tags;
@@ -853,3 +863,4 @@ let g:tagbar_width = 60
 
 "autocmd
 autocmd BufEnter * call AutoToggleAutoSave()
+autocmd TabEnter * call AdjustNu()
