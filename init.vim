@@ -864,6 +864,3 @@ let g:tagbar_width = 60
 "autocmd
 autocmd BufEnter * call AutoToggleAutoSave()
 autocmd TabEnter * call AdjustNu()
-
-11
-22
