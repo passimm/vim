@@ -33,6 +33,7 @@ Plug 'https://github.com/sheerun/vim-polyglot.git'
 Plug 'https://github.com/lifepillar/vim-solarized8.git'
 Plug 'https://github.com/patstockwell/vim-monokai-tasty.git'
 Plug 'https://github.com/cormacrelf/vim-colors-github.git'
+Plug 'kyoz/purify', { 'rtp': 'vim' }
 
 call plug#end()
 
@@ -267,13 +268,13 @@ syntax on
 set termguicolors
 set background=dark
 
-colorscheme night-owl
+colorscheme purify
 " set background=light
 " colorscheme solarized8
 " colorscheme vim-monokai-tasty
 
 let g:lightline = {}
-let g:lightline.colorscheme = "nightowl"
+let g:lightline.colorscheme = "purify"
 " let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
 " let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
 " let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
