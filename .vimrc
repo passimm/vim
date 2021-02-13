@@ -598,7 +598,7 @@ function! SEARCH_CLASS(word)
     if has('win32')
         execute printf(':LAck -e "(class|struct|enum|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]" -e "typedef.*%s;"', a:word, a:word)
     else
-        execute printf(':LAck "(class|struct|enum|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]*$" -e "typedef.*%s;"', a:word, a:word)
+        execute printf(':LAck -e "(class|struct|enum|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]*$" -e "typedef.*%s;"', a:word, a:word)
     endif
     call SETLOCLIST(printf('Class: %s', a:word))
 
