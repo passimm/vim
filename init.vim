@@ -598,7 +598,7 @@ function! SEARCH_CLASS(word)
     if has('win32')
         execute printf(':LAck -e "(class|struct|enum|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]" -e "typedef.*%s;"', a:word, a:word)
     else
-        execute printf(':LAck "(class|struct|enum|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]*$" -e "typedef.*%s;"', a:word, a:word)
+        execute printf(':LAck -e "(class|struct|enum|interface)\s+((dll|DLL|Dll)\S+\s+)*%s\b[^;]*$" -e "typedef.*%s;"', a:word, a:word)
     endif
     call SETLOCLIST(printf('Class: %s', a:word))
 
@@ -678,6 +678,9 @@ function! SPLIT()
     if winnr('$') > 2
         :set nonu
     endif
+    if winnr('$') > 4
+        :TagbarClose
+    endif
 endfunction
 function! LACK_OPEN()
     let width = winwidth(0)
@@ -751,18 +754,30 @@ function! ToggleList(bufname, pfx)
 endfunction
 
 function! AutoToggleAutoSave()
+  if &buftype != ""
+      return
+  endif
   let line = line('$')
   if (line > 20000)
     let g:auto_save = 0
   endif
 endfunction
 
-function! AdjustNu()
+function! AutoToggle()
     if winnr('$') > 2
         :windo set nonu
     else
         :windo set nu
     endif
+    let normal_count=0
+    :windo if &buftype == "" | let normal_count=normal_count+1 | endif
+    
+    if normal_count < 2
+        :TagbarOpen
+    else
+        :TagbarClose
+    endif
+
 endfunction
 
 "ctags/cscope switcher
@@ -867,8 +882,8 @@ let g:auto_save_in_insert_mode = 1
 let g:tagbar_width = 60
 
 "autocmd
-autocmd BufEnter * call AutoToggleAutoSave()
-autocmd TabEnter * call AdjustNu()
+autocmd WinEnter * call AutoToggleAutoSave()
+autocmd TabEnter * call AutoToggle()
 
 :set shellxescape-=\>
 :set shellxescape-=\&
