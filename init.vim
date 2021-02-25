@@ -769,15 +769,6 @@ function! AutoToggle()
     else
         :windo set nu
     endif
-    let normal_count=0
-    :windo if &buftype == "" | let normal_count=normal_count+1 | endif
-    
-    if normal_count < 2
-        :TagbarOpen
-    else
-        :TagbarClose
-    endif
-
 endfunction
 
 "ctags/cscope switcher
