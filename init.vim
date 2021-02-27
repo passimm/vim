@@ -268,13 +268,13 @@ syntax on
 set termguicolors
 set background=dark
 
-colorscheme purify
+colorscheme gruvbox
 " set background=light
 " colorscheme solarized8
 " colorscheme vim-monokai-tasty
 
 let g:lightline = {}
-let g:lightline.colorscheme = "purify"
+let g:lightline.colorscheme = "gruvbox"
 " let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
 " let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
 " let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
