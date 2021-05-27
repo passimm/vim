@@ -222,28 +222,28 @@ function! Devicons_Fileformat()"{{{
     return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction"}}}
 function! Artify_active_tab_num(n) abort"{{{
-    return Artify(a:n, 'bold')." \ue0bb"
+    return artify#convert(a:n, 'bold')." \ue0bb"
 endfunction"}}}
 function! Artify_inactive_tab_num(n) abort"{{{
-    return Artify(a:n, 'double_struck')." \ue0bb"
+    return artify#convert(a:n, 'double_struck')." \ue0bb"
 endfunction"}}}
 function! Artify_lightline_tab_filename(s) abort"{{{
-    return Artify(lightline#tab#filename(a:s), 'monospace')
+    return artify#convert(lightline#tab#filename(a:s), 'monospace')
 endfunction"}}}
 function! Artify_lightline_mode() abort"{{{
-    return Artify(lightline#mode(), 'monospace')
+    return artify#convert(lightline#mode(), 'monospace')
 endfunction"}}}
 function! Artify_AutoSave() abort"{{{
-    return g:auto_save > 0 ? Artify("AutoSave:", 'sans_serif').Artify('ON', 'italic') : Artify("AutoSave:", 'sans_serif').Artify('OFF', 'italic')
+    return g:auto_save > 0 ? artify#convert("AutoSave:", 'sans_serif').artify#convert('ON', 'italic') : artify#convert("AutoSave:", 'sans_serif').artify#convert('OFF', 'italic')
 endfunction"}}}
 function! Artify_line_percent() abort"{{{
-    return Artify(string((100*line('.'))/line('$')), 'bold')
+    return artify#convert(string((100*line('.'))/line('$')), 'bold')
 endfunction"}}}
 function! Artify_line_num() abort"{{{
-    return Artify(string(line('.')), 'bold')
+    return artify#convert(string(line('.')), 'bold')
 endfunction"}}}
 function! Artify_col_num() abort"{{{
-    return Artify(string(getcurpos()[2]), 'bold')
+    return artify#convert(string(getcurpos()[2]), 'bold')
 endfunction"}}}
 function! Quickfix_Title() abort"{{{
     if &buftype == "quickfix"
@@ -254,7 +254,7 @@ function! Quickfix_Title() abort"{{{
 endfunction"}}}
 function! Artify_gitbranch() abort"{{{
     if gitbranch#name() !=# ''
-        return Artify(gitbranch#name(), 'monospace')." \ue725"
+        return artify#convert(gitbranch#name(), 'monospace')." \ue725"
     else
         return "\ue61b"
     endif
@@ -268,13 +268,13 @@ syntax on
 set termguicolors
 set background=dark
 
-colorscheme gruvbox
+colorscheme night-owl
 " set background=light
 " colorscheme solarized8
 " colorscheme vim-monokai-tasty
 
 let g:lightline = {}
-let g:lightline.colorscheme = "gruvbox"
+let g:lightline.colorscheme = "nightowl"
 " let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
 " let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
 " let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
