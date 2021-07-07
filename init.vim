@@ -627,6 +627,22 @@ function! SEARCH_INSTANCE(word)
     call RESIZE_QUICKFIX()
 endfunction
 
+command! XACDC :call XAC_DC()
+function! XAC_DC()
+    tabe DynamicConfig\Schema\Xsd\XStoreConfigSettings.partial.xsd
+    tabe DynamicConfig\Native\lib\DynamicConfigXmlNodes.h
+    tabe DynamicConfig\Native\lib\DynamicConfigManager_ParseConfiguration_XACServer.cpp
+    tabe DynamicConfig\Native\inc\XACServerConfigSettings.h
+    call SPLIT()
+    e DynamicConfig\Native\lib\XACServerConfigSettings.cpp
+    tabprevious 3
+endfunction
+
+command! SED :call SE_D()
+function! SE_D()
+    :%s/ \{1,\}$//
+endfunction
+
 function! SETLOCLIST(word)
     execute printf("call setloclist(0, [], 'a', {'title': '%s'})", a:word)
 endfunction
