@@ -415,6 +415,7 @@ nnoremap ,o :only\|tabo<cr>
 nnoremap L :call ToggleList("Location List", 'l')<CR>
 nnoremap ,mm /\v(\<\<\<\<\<\<\<\|\>\>\>\>\>\>\>\|\=\=\=\=\=\=\=\|\\|\\|\\|\\|\\|\\|\\|\v)<cr>
 nnoremap ed :edit %:p:h<cr>
+nnoremap ,te :term<cr><C-W>T<cr>
 
 "text
 nmap } :call SEARCH(0,'<C-R>=expand("<cword>")<CR>')<CR>
@@ -629,7 +630,7 @@ endfunction
 
 command! XACDC :call XAC_DC()
 function! XAC_DC()
-    tabe DynamicConfig\Schema\Xsd\XStoreConfigSettings.partial.xsd
+    tabe DynamicConfig\Schema\XACServer\XACServerSettings.partial.xsd
     tabe DynamicConfig\Native\lib\DynamicConfigXmlNodes.h
     tabe DynamicConfig\Native\lib\DynamicConfigManager_ParseConfiguration_XACServer.cpp
     tabe DynamicConfig\Native\inc\XACServerConfigSettings.h
