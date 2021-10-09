@@ -155,7 +155,6 @@ iab react1 import React from 'react';
 \<CR>Map.propTypes = {
 \<CR>};
 
-cab tabe tabl\|tabe
 cab fork :tab split
 cab svn_revert :!svn revert %:p
 cab git_revert :!git checkout -- %:p
@@ -416,6 +415,9 @@ nnoremap L :call ToggleList("Location List", 'l')<CR>
 nnoremap ,mm /\v(\<\<\<\<\<\<\<\|\>\>\>\>\>\>\>\|\=\=\=\=\=\=\=\|\\|\\|\\|\\|\\|\\|\\|\v)<cr>
 nnoremap ed :edit %:p:h<cr>
 nnoremap ,te :term<cr><C-W>T<cr>
+nnoremap ,w :vertical resize 250<cr>
+nnoremap ,ww :vsplit<cr>:q<cr>
+vnoremap <C-N> :NR<cr><C-W>L<cr>
 
 "text
 nmap } :call SEARCH(0,'<C-R>=expand("<cword>")<CR>')<CR>
