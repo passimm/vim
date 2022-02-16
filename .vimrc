@@ -633,8 +633,8 @@ endfunction
 command! XACDC :call XAC_DC()
 function! XAC_DC()
     tabe DynamicConfig\Schema\XACServer\XACServerSettings.partial.xsd
-    tabe DynamicConfig\Native\lib\DynamicConfigXmlNodes.h
-    tabe DynamicConfig\Native\lib\DynamicConfigManager_ParseConfiguration_XACServer.cpp
+    tabe DynamicConfig\Native\lib\DynamicConfigManager_InitDevFabric.cpp
+    tabe DynamicConfig\MiscSettings\lib\XACServerSegment.cpp
     tabe DynamicConfig\Native\inc\XACServerConfigSettings.h
     call SPLIT()
     e DynamicConfig\Native\lib\XACServerConfigSettings.cpp
