@@ -790,6 +790,11 @@ function! AutoToggle()
     endif
 endfunction
 
+function! FullScreen()
+    call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 1)
+    call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)
+endfunction
+
 "ctags/cscope switcher
 set tags=./tags;
 set cst
