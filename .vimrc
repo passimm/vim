@@ -795,6 +795,10 @@ function! FullScreen()
     call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)
 endfunction
 
+function! FullScreenOff()
+    call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 1)
+endfunction
+
 "ctags/cscope switcher
 set tags=./tags;
 set cst
