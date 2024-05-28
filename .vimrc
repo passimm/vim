@@ -299,7 +299,7 @@ let g:lightline.inactive = {
             \ }
 let g:lightline.tabline = {
             \ 'left': [ [ 'tabs' ] ],
-            \ 'right': [ [ 'artify_gitbranch'], ['gitstatus' ]]
+            \ 'right': [ [ 'artify_gitbranch'], ['gitstatus' ], ['dir']]
             \ }
 let g:lightline.tab = {
             \ 'active': [ 'artify_filename', 'modified' ],
@@ -332,6 +332,7 @@ let g:lightline.component = {
             \ 'autosave': '%{Artify_AutoSave()}',
             \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
             \ 'modified': '%M',
+            \ 'dir': '%{getcwd()}',
             \ 'bufnum': '%n',
             \ 'paste': '%{&paste?"PASTE":""}',
             \ 'readonly': '%R',
