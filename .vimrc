@@ -1,5 +1,7 @@
 if has("gui_running") 
     call plug#begin('~\vimfiles\plugged')
+elseif has("nvim")
+    call plug#begin()
 else
     call plug#begin('~/.vim/plugged')
 endif
@@ -34,6 +36,8 @@ Plug 'https://github.com/lifepillar/vim-solarized8.git'
 Plug 'https://github.com/patstockwell/vim-monokai-tasty.git'
 Plug 'https://github.com/cormacrelf/vim-colors-github.git'
 Plug 'kyoz/purify', { 'rtp': 'vim' }
+Plug 'https://github.com/sainnhe/sonokai.git'
+Plug 'https://github.com/rebelot/kanagawa.nvim.git'
 
 call plug#end()
 
@@ -267,13 +271,22 @@ syntax on
 set termguicolors
 set background=dark
 
-colorscheme night-owl
+if has("nvim")
+    colorscheme kanagawa
+else
+    colorscheme sonokai
+endif
+
 " set background=light
 " colorscheme solarized8
 " colorscheme vim-monokai-tasty
 
 let g:lightline = {}
-let g:lightline.colorscheme = "nightowl"
+if has("nvim")
+    let g:lightline.colorscheme = "kanagawa"
+else
+    let g:lightline.colorscheme = "sonokai"
+endif
 " let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
 " let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
 " let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
@@ -479,13 +492,6 @@ autocmd FileType python set omnifunc=python3complete#Complete
 "------------------------------------------------------------------------------------------------------
 "Plugin Settings
 
-"CScope
-set cscopequickfix=s-,c-,d-,i-,t-,e-
-cs kill -1
-cab cs_s :tabe\|cs find s
-cab cs_e :tabe\|cs find e
-cab cs_g :tabe\|cs find g
-cab cs_c :tabe\|cs find c
 command! -nargs=1 SearchCurrentFile :call s:SearchCurrentFile(<q-args>)
 cab scf SearchCurrentFile
 cab cwd lcd %:p:h
@@ -800,16 +806,6 @@ function! FullScreenOff()
     call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 1)
 endfunction
 
-"ctags/cscope switcher
-set tags=./tags;
-set cst
-set csto=1
-set csprg=cscope.sh"cscope.sh: #!/bin/sh     cscope -C "$@"
-command! -nargs=1 STags :call SetTag(<q-args>)
-function! SetTag(name)
-    execute "set tags=~/tags/".a:name.".tags"
-endfunction
-
 "vim-bookmark
 "let g:bookmark_sign = '>>'
 "let g:bookmark_annotation_sign = '##'
@@ -907,3 +903,13 @@ autocmd TabEnter * call AutoToggle()
 
 :set shellxescape-=\>
 :set shellxescape-=\&
+
+function! GetTitle()
+    let pp = getcwd()
+    let ll = split(pp, '[/\\]')
+    let lasttwo = ll[-2:-1]
+    return join(lasttwo, '/')
+endfunction
+if !has("nvim")
+    :set titlestring=%{GetTitle()}
+endif
