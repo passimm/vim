@@ -38,6 +38,7 @@ Plug 'https://github.com/cormacrelf/vim-colors-github.git'
 Plug 'kyoz/purify', { 'rtp': 'vim' }
 Plug 'https://github.com/sainnhe/sonokai.git'
 Plug 'https://github.com/rebelot/kanagawa.nvim.git'
+Plug 'https://github.com/loctvl842/monokai-pro.nvim.git'
 
 call plug#end()
 
@@ -272,7 +273,7 @@ set termguicolors
 set background=dark
 
 if has("nvim")
-    colorscheme kanagawa
+    colorscheme monokai-pro
 else
     colorscheme sonokai
 endif
@@ -283,7 +284,7 @@ endif
 
 let g:lightline = {}
 if has("nvim")
-    let g:lightline.colorscheme = "kanagawa"
+    let g:lightline.colorscheme = "monokai-pro"
 else
     let g:lightline.colorscheme = "sonokai"
 endif
